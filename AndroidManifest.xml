@@ -5,14 +5,14 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="10"
+        android:minSdkVersion="14"
         android:targetSdkVersion="18" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name="com.codepath.apps.restclienttemplate.RestClientApp"
+        android:name="com.maryamq.basictwitter.TwitterApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -25,7 +25,7 @@
             android:value="1" />
 
         <activity
-            android:name="com.codepath.apps.restclienttemplate.LoginActivity"
+            android:name="com.maryamq.basictwitter.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,9 +39,13 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="cprest"
+                    android:host="cpbasictweets"
                     android:scheme="oauth" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.maryamq.basictwitter.TwitterTimelineActivity"
+            android:label="@string/title_activity_timeline" >
         </activity>
     </application>
 

@@ -1,12 +1,15 @@
-package com.codepath.apps.restclienttemplate;
+package com.maryamq.basictwitter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 
+import com.codepath.apps.restclienttemplate.R;
 import com.codepath.oauth.OAuthLoginActivity;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
-public class LoginActivity extends OAuthLoginActivity<RestClient> {
+public class LoginActivity extends OAuthLoginActivity<TwitterClient> {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +24,13 @@ public class LoginActivity extends OAuthLoginActivity<RestClient> {
 		return true;
 	}
 
+
 	// OAuth authenticated successfully, launch primary authenticated activity
 	// i.e Display application "homepage"
 	@Override
 	public void onLoginSuccess() {
-		// Intent i = new Intent(this, PhotosActivity.class);
-		// startActivity(i);
+		Intent i = new Intent(this, TwitterTimelineActivity.class);
+		startActivity(i);
 	}
 
 	// OAuth authentication flow failed, handle the error

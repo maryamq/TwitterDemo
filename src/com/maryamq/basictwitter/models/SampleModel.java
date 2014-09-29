@@ -1,4 +1,4 @@
-package com.codepath.apps.restclienttemplate.models;
+package com.maryamq.basictwitter.models;
 
 import java.util.List;
 
