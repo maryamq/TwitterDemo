@@ -44,7 +44,7 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 		TextView tvScreenName = (TextView) convertView
 				.findViewById(R.id.tvScreenName);
 		TextView tvBody = (TextView) convertView.findViewById(R.id.tvBody);
-		TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
+		TextView tvName = (TextView) convertView.findViewById(R.id.tvTweeterName);
 		TextView tvTime = (TextView) convertView.findViewById(R.id.tvTime);
 		ImageButton ibRetweet = (ImageButton)convertView.findViewById(R.id.ibRetweet);
 		ImageButton ibReply = (ImageButton)convertView.findViewById(R.id.ibReply);
