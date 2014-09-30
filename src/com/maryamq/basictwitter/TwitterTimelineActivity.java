@@ -14,12 +14,13 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.codepath.apps.restclienttemplate.ComposeDialog;
-import com.codepath.apps.restclienttemplate.ComposeDialog.ComposeDialogListener;
 import com.codepath.apps.restclienttemplate.R;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+
+import com.maryamq.basictwitter.ComposeDialog.ComposeDialogListener;
+import com.maryamq.basictwitter.ComposeDialog.Mode;
 import com.maryamq.basictwitter.models.Tweet;
 
 public class TwitterTimelineActivity extends FragmentActivity implements ComposeDialogListener {
@@ -57,7 +58,7 @@ public class TwitterTimelineActivity extends FragmentActivity implements Compose
 			
 		});
 		tweets = new ArrayList<Tweet>();
-		aTweets = new TweetArrayAdapter(this, tweets);
+		aTweets = new TweetArrayAdapter(this, tweets, client, this.getSupportFragmentManager());
 	    lvTweets.setAdapter(aTweets);
 	    
 	    swipeContainer = (SwipeRefreshLayout)this.findViewById(R.id.swipeContainer);
@@ -143,11 +144,9 @@ public class TwitterTimelineActivity extends FragmentActivity implements Compose
 		}
 	
 	@Override
-	public void onPostNewTweet(Tweet newTweet) {
-	   //this.tweets.add(0, newTweet);
-	   //aTweets.notifyDataSetChanged();
-		this.fetchLatest();
-		
+	public void onPostNewTweet(Tweet newTweet, Tweet sourceTweet, Mode mode) {
+	   this.tweets.add(0, newTweet);
+	   aTweets.notifyDataSetChanged();	
 	}
 
 	private void updateIds() {

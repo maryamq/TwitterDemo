@@ -51,4 +51,26 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#8D8D8D" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvBody"
+        android:layout_marginTop="5dp" >
+
+        <ImageButton
+            android:id="@+id/ibRetweet"
+            android:layout_width="82dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/ic_action_retweet" />
+
+        <ImageButton
+            android:id="@+id/ibReply"
+            android:layout_width="82dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/ic_action_reply" />
+    </LinearLayout>
+
 </RelativeLayout>

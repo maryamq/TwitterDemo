@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
 import android.content.Context;
 import android.text.format.DateUtils;
 import android.widget.Toast;
