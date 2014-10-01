@@ -1,4 +1,4 @@
-package com.maryamq.basictwitter.dialog;
+package com.maryamq.basictwitter.listeners;
 
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;

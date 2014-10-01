@@ -32,9 +32,9 @@ import com.maryamq.basictwitter.adapters.TweetArrayAdapter;
 import com.maryamq.basictwitter.client.TwitterClient;
 import com.maryamq.basictwitter.client.Utils;
 import com.maryamq.basictwitter.dialog.ComposeDialog;
-import com.maryamq.basictwitter.dialog.EndlessScrollListener;
 import com.maryamq.basictwitter.dialog.ComposeDialog.ComposeDialogListener;
 import com.maryamq.basictwitter.dialog.ComposeDialog.Mode;
+import com.maryamq.basictwitter.listeners.EndlessScrollListener;
 import com.maryamq.basictwitter.models.Tweet;
 
 public class TwitterTimelineActivity extends FragmentActivity implements

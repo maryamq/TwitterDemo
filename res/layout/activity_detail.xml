@@ -44,25 +44,38 @@
         android:autoLink="all"
         android:text="Tweet Body" />
 
+    <ImageView
+        android:id="@+id/ivDetailMedia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignRight="@+id/ivProfilePicture"
+        android:layout_below="@+id/tvTweetBody"
+        android:padding="5dp"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+
+
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvTweetBody"
+        android:layout_below="@+id/ivDetailMedia"
         android:layout_marginTop="5dp" >
 
-           <Button
-               android:id="@+id/ibRetweet"
-               android:layout_width="86dp"
-               android:layout_height="wrap_content"
-               android:layout_marginRight="20dp"
-               android:background="@null"
-               android:drawableLeft="@drawable/ic_action_retweet"
-               android:drawablePadding="-20dp"
-               android:text="Retweet"
-               android:textAppearance="?android:attr/textAppearanceSmall"
-               android:textColor="#66757f" />
+        <Button
+            android:id="@+id/ibRetweet"
+            android:layout_width="86dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="@null"
+            android:drawableLeft="@drawable/ic_action_retweet"
+            android:drawablePadding="-20dp"
+            android:text="Retweet"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#66757f" />
 
         <Button
             android:id="@+id/ibReply"
@@ -76,9 +89,6 @@
             android:text="Reply"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#66757f" />
-
     </LinearLayout>
-
- 
 
 </RelativeLayout>

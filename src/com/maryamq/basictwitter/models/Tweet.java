@@ -31,11 +31,18 @@ public class Tweet extends Model implements Serializable {
 
 	@Column(name = "user", onUpdate = ForeignKeyAction.CASCADE, onDelete = ForeignKeyAction.CASCADE, notNull = true)
 	private User user;
+	
+	@Column(name = "media_url")
+	private String media_url;  // TODO: Create its own model
 
 	public String getBody() {
 		return body;
 	}
 
+	public String getMediaUrl() {
+		return media_url;
+	}
+	
 	public long getUid() {
 		return uid;
 	}
@@ -48,11 +55,24 @@ public class Tweet extends Model implements Serializable {
 		return user;
 	}
 
+	
 	public void persist() {
 		this.user = this.user.updateOrCreateUser();
 		this.save();
 	}
 
+	private static String getMediaUrl(JSONObject json) throws JSONException {
+		if (!json.getJSONObject("entities").isNull("media")) {
+            JSONArray mediaArray = json.getJSONObject("entities").getJSONArray("media");
+            if (mediaArray.length() > 0) {
+            	JSONObject media = mediaArray.getJSONObject(0);
+            	if (!media.isNull("media_url_https")){
+            		return media.get("media_url_https").toString();
+            	} 
+            }
+        }
+		return "";
+	}
 	public static Tweet fromJSON(JSONObject json) {
 		Tweet tweet = new Tweet();
 		// Extract values form JSON
@@ -61,6 +81,8 @@ public class Tweet extends Model implements Serializable {
 			tweet.uid = json.getLong("id");
 			tweet.createdAt = json.getString("created_at");
 			tweet.user = User.fromJSON(json.getJSONObject("user"));
+			// Get media url
+			tweet.media_url = getMediaUrl(json);
 			tweet.persist();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

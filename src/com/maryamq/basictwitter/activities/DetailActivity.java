@@ -23,8 +23,6 @@ public class DetailActivity extends FragmentActivity {
 	static final String TWEET_DATA_KEY = "tweet";
 	private TwitterClient client;
 
-	 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -32,22 +30,33 @@ public class DetailActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail);
 		getActionBar().hide();
-		final Tweet tweetData = (Tweet)this.getIntent().getSerializableExtra(TWEET_DATA_KEY);
-		
-		TextView tvUser = (TextView)this.findViewById(R.id.tvUserName);
+		final Tweet tweetData = (Tweet) this.getIntent().getSerializableExtra(
+				TWEET_DATA_KEY);
+
+		TextView tvUser = (TextView) this.findViewById(R.id.tvUserName);
 		tvUser.setText(tweetData.getUser().getName());
-		
-		TextView tvScreenName = (TextView)this.findViewById(R.id.tvHandle);
+
+		TextView tvScreenName = (TextView) this.findViewById(R.id.tvHandle);
 		tvScreenName.setText("@" + tweetData.getUser().getScreenName());
-		
-		TextView tvBody = (TextView)this.findViewById(R.id.tvTweetBody);
+
+		TextView tvBody = (TextView) this.findViewById(R.id.tvTweetBody);
 		tvBody.setText(Html.fromHtml(tweetData.getBody()));
-		
-		ImageView ivProfileImg = (ImageView)this.findViewById(R.id.ivProfilePicture);
+
+		ImageView ivProfileImg = (ImageView) this
+				.findViewById(R.id.ivProfilePicture);
 		ImageLoader imgLoader = ImageLoader.getInstance();
 		ivProfileImg.setImageResource(android.R.color.transparent);
 		imgLoader.displayImage(tweetData.getUser().getProfileImageUrl(),
 				ivProfileImg);
+
+		// SHow media
+		ImageView ivMedia = (ImageView) this.findViewById(R.id.ivDetailMedia);
+		ivMedia.setImageResource(android.R.color.transparent);
+		String mediaUrl = tweetData.getMediaUrl();
+		if (mediaUrl != null && !mediaUrl.isEmpty()) {
+			imgLoader.displayImage(mediaUrl, ivMedia);
+			ivMedia.setVisibility(View.VISIBLE);
+		}
 		
 		Button ibRetweet = (Button) this.findViewById(R.id.ibRetweet);
 		Button ibReply = (Button) this.findViewById(R.id.ibReply);
@@ -57,7 +66,8 @@ public class DetailActivity extends FragmentActivity {
 			public void onClick(View v) {
 				ComposeDialog dialog = new ComposeDialog(client, tweetData,
 						Mode.RETWEET);
-				dialog.show(DetailActivity.this.getSupportFragmentManager(), "fragment_retweet");
+				dialog.show(DetailActivity.this.getSupportFragmentManager(),
+						"fragment_retweet");
 			}
 
 		});
@@ -67,12 +77,12 @@ public class DetailActivity extends FragmentActivity {
 			public void onClick(View v) {
 				ComposeDialog dialog = new ComposeDialog(client, tweetData,
 						Mode.REPLY);
-				dialog.show(DetailActivity.this.getSupportFragmentManager(), "fragment_reply");
+				dialog.show(DetailActivity.this.getSupportFragmentManager(),
+						"fragment_reply");
 			}
 
 		});
-	}
 
-	
+	}
 
 }

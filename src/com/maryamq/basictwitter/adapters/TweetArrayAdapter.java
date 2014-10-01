@@ -29,6 +29,21 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 
+	private final class ShowDetailsClickListener implements OnClickListener {
+		private final Tweet mClickedTweet;
+
+		private ShowDetailsClickListener(Tweet clickedTweet) {
+			mClickedTweet = clickedTweet;
+		}
+
+		@Override
+		public void onClick(View v) {
+			Intent intent = new Intent(v.getContext(), DetailActivity.class);
+			intent.putExtra("tweet", mClickedTweet);
+			v.getContext().startActivity(intent);
+		}
+	}
+
 	TwitterClient client;
 	private FragmentManager fm;
 
@@ -61,16 +76,7 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 				.findViewById(R.id.ibReply);
 
 		final Tweet clickedTweet = this.getItem(position);
-		tvBody.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(v.getContext(), DetailActivity.class);
-				intent.putExtra("tweet", clickedTweet);
-				v.getContext().startActivity(intent);
-			}
-			
-		});
+		tvBody.setOnClickListener(new ShowDetailsClickListener(clickedTweet));
 		ibRetweet.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -101,6 +107,16 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 		ivProfileImg.setImageResource(android.R.color.transparent);
 		imgLoader.displayImage(tweet.getUser().getProfileImageUrl(),
 				ivProfileImg);
+
+		// SHow media
+		ImageView ivMedia = (ImageView)convertView.findViewById(R.id.ivMedia);
+		ivMedia.setOnClickListener(new ShowDetailsClickListener(clickedTweet));
+		ivMedia.setImageResource(android.R.color.transparent);
+		String mediaUrl = tweet.getMediaUrl();
+		if (mediaUrl != null && !mediaUrl.isEmpty()) {
+			imgLoader.displayImage(mediaUrl, ivMedia);
+			ivMedia.setVisibility(View.VISIBLE);
+		}
 		return convertView;
 	}
 

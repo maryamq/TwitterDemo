@@ -51,11 +51,25 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#8D8D8D" />
 
+    <ImageView
+        android:id="@+id/ivMedia"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignLeft="@+id/tvBody"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignStart="@+id/tvBody"
+        android:layout_below="@+id/tvBody"
+        android:adjustViewBounds="true"
+        android:padding="5dp"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvBody"
+        android:layout_below="@+id/ivMedia"
         android:layout_marginTop="5dp" >
 
         <ImageButton
