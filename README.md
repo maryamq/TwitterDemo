@@ -9,6 +9,7 @@ Following user stories were implemented:
  * User can view more tweets as they scroll with infinite pagination
  * Optional: Links in tweets are clickable and will launch the web browser 
  * User can post a tweet. Tweet is visible in timeline.
+ * Optional: Network connectivity check.
 
 The following advanced user stories are optional:
 
