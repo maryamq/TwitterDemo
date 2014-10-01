@@ -154,7 +154,7 @@ public class TwitterTimelineActivity extends FragmentActivity implements
 			return;
 		}
 		client.getHomeTimelineSince(since_id, new JsonHttpResponseHandler() {
-			@SuppressLint("NewApi")
+
 			@Override
 			public void onSuccess(JSONArray jsonArray) {
 				swipeContainer.setRefreshing(false);
