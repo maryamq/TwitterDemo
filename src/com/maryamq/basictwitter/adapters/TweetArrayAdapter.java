@@ -113,9 +113,12 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 		ivMedia.setOnClickListener(new ShowDetailsClickListener(clickedTweet));
 		ivMedia.setImageResource(android.R.color.transparent);
 		String mediaUrl = tweet.getMediaUrl();
+		Utils.log("Twitter url: " + mediaUrl);
 		if (mediaUrl != null && !mediaUrl.isEmpty()) {
 			imgLoader.displayImage(mediaUrl, ivMedia);
 			ivMedia.setVisibility(View.VISIBLE);
+		} else {
+			ivMedia.setVisibility(View.GONE);
 		}
 		return convertView;
 	}

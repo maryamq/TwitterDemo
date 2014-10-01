@@ -58,7 +58,6 @@
         android:layout_alignLeft="@+id/tvBody"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_alignStart="@+id/tvBody"
         android:layout_below="@+id/tvBody"
         android:adjustViewBounds="true"
         android:padding="5dp"

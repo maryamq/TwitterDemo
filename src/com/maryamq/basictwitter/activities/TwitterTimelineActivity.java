@@ -53,6 +53,7 @@ public class TwitterTimelineActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		getActionBar().setBackgroundDrawable(new ColorDrawable(0xFF55ACEE));
 		setContentView(R.layout.activity_timeline);
 		client = TwitterApplication.getRestClient();
 
@@ -94,8 +95,8 @@ public class TwitterTimelineActivity extends FragmentActivity implements
 				android.R.color.holo_orange_light,
 				android.R.color.holo_red_light);
 
-		// this.fetchLatest();
-		getActionBar().setBackgroundDrawable(new ColorDrawable(0xFF55ACEE));
+		this.fetchLatest();
+		
 	}
 
 	@Override
