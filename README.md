@@ -13,8 +13,8 @@ Following user stories were implemented:
 The following advanced user stories are optional:
 
  * Advanced: User can refresh tweets timeline by pulling down to refresh (i.e pull-to-refresh)
- * Advanced: User can open the twitter app offline and see last loaded tweets
- * Tweets are persisted into sqlite and can be displayed from the local DB
+ * Advanced (Partial): User can open the twitter app offline and see last loaded tweets
+ * Tweets are persisted into sqlite and can be displayed from the local DB (Note: Not implemented CusorAdapter).
  * Advanced: User can tap a tweet to display a "detailed" view of that tweet
  * Advanced: User can select "reply" from detail view to respond to a tweet
  * Advanced(Partial): Some branding to make it look like twitter.
@@ -22,3 +22,6 @@ The following advanced user stories are optional:
  * Bonus: Compose activity is replaced with a modal overlay
 
 
+![Video Walkthrough](story.gif)
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
