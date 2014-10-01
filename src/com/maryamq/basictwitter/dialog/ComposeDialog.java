@@ -1,4 +1,4 @@
-package com.maryamq.basictwitter;
+package com.maryamq.basictwitter.dialog;
 
 import org.json.JSONObject;
 
@@ -14,8 +14,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.codepath.apps.restclienttemplate.R;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.maryamq.basictwitter.R;
+import com.maryamq.basictwitter.R.id;
+import com.maryamq.basictwitter.R.layout;
+import com.maryamq.basictwitter.client.TwitterClient;
+import com.maryamq.basictwitter.client.Utils;
 import com.maryamq.basictwitter.models.Tweet;
 
 public class ComposeDialog extends DialogFragment {
@@ -71,7 +75,7 @@ public class ComposeDialog extends DialogFragment {
 		}
 	}
 
-	enum Mode {
+	public enum Mode {
 		COMPOSE, RETWEET, REPLY
 	};
 

@@ -1,4 +1,6 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      android:textColor="@android:color/white"
+      android:background="#55ACEE" >
     <item
         android:id="@+id/miCompose"
         android:icon="@drawable/ic_action_compose"

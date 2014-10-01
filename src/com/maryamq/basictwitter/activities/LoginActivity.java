@@ -1,13 +1,17 @@
-package com.maryamq.basictwitter;
+package com.maryamq.basictwitter.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 
-import com.codepath.apps.restclienttemplate.R;
+
 import com.codepath.oauth.OAuthLoginActivity;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.maryamq.basictwitter.R;
+import com.maryamq.basictwitter.R.layout;
+import com.maryamq.basictwitter.R.menu;
+import com.maryamq.basictwitter.client.TwitterClient;
 
 public class LoginActivity extends OAuthLoginActivity<TwitterClient> {
 

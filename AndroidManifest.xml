@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.codepath.apps.restclienttemplate"
+    package="com.maryamq.basictwitter"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -9,23 +9,30 @@
         android:targetSdkVersion="18" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name="com.maryamq.basictwitter.TwitterApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/ic_bird"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <provider
+            android:name="com.activeandroid.content.ContentProvider"
+            android:authorities="com.maryamq.basictwitter"
+            android:exported="false" />
+
         <meta-data
             android:name="AA_DB_NAME"
-            android:value="RestClient.db" />
+            android:value="TwitterApp.db" />
         <meta-data
             android:name="AA_DB_VERSION"
             android:value="1" />
 
         <activity
-            android:name="com.maryamq.basictwitter.LoginActivity"
+            android:name="com.maryamq.basictwitter.activities.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,7 +51,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.maryamq.basictwitter.TwitterTimelineActivity"
+            android:name="com.maryamq.basictwitter.activities.TwitterTimelineActivity"
+            android:label="@string/title_activity_timeline" >
+        </activity>
+                <activity
+            android:name="com.maryamq.basictwitter.activities.DetailActivity"
             android:label="@string/title_activity_timeline" >
         </activity>
     </application>

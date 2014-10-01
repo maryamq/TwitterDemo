@@ -1,8 +1,9 @@
-package com.maryamq.basictwitter;
+package com.maryamq.basictwitter.adapters;
 
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v4.app.FragmentManager;
 import android.text.Html;
@@ -15,8 +16,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.codepath.apps.restclienttemplate.R;
-import com.maryamq.basictwitter.ComposeDialog.Mode;
+import com.maryamq.basictwitter.R;
+import com.maryamq.basictwitter.R.id;
+import com.maryamq.basictwitter.R.layout;
+import com.maryamq.basictwitter.activities.DetailActivity;
+import com.maryamq.basictwitter.client.TwitterClient;
+import com.maryamq.basictwitter.client.Utils;
+import com.maryamq.basictwitter.dialog.ComposeDialog;
+import com.maryamq.basictwitter.dialog.ComposeDialog.Mode;
 import com.maryamq.basictwitter.models.Tweet;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -24,8 +31,9 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 
 	TwitterClient client;
 	private FragmentManager fm;
-	
-	public TweetArrayAdapter(Context context, List<Tweet> tweets, TwitterClient client, FragmentManager fm) {
+
+	public TweetArrayAdapter(Context context, List<Tweet> tweets,
+			TwitterClient client, FragmentManager fm) {
 		super(context, 0, tweets);
 		this.client = client;
 		this.fm = fm;
@@ -44,29 +52,44 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 		TextView tvScreenName = (TextView) convertView
 				.findViewById(R.id.tvScreenName);
 		TextView tvBody = (TextView) convertView.findViewById(R.id.tvBody);
-		TextView tvName = (TextView) convertView.findViewById(R.id.tvTweeterName);
+		TextView tvName = (TextView) convertView
+				.findViewById(R.id.tvTweeterName);
 		TextView tvTime = (TextView) convertView.findViewById(R.id.tvTime);
-		ImageButton ibRetweet = (ImageButton)convertView.findViewById(R.id.ibRetweet);
-		ImageButton ibReply = (ImageButton)convertView.findViewById(R.id.ibReply);
-		
+		ImageButton ibRetweet = (ImageButton) convertView
+				.findViewById(R.id.ibRetweet);
+		ImageButton ibReply = (ImageButton) convertView
+				.findViewById(R.id.ibReply);
+
 		final Tweet clickedTweet = this.getItem(position);
-		ibRetweet.setOnClickListener(new OnClickListener(){
+		tvBody.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				 ComposeDialog dialog = new ComposeDialog(client, clickedTweet, Mode.RETWEET);
-				 dialog.show(fm, "fragment_retweet");				
+				Intent intent = new Intent(v.getContext(), DetailActivity.class);
+				intent.putExtra("tweet", clickedTweet);
+				v.getContext().startActivity(intent);
 			}
 			
 		});
-		ibReply.setOnClickListener(new OnClickListener(){
+		ibRetweet.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				 ComposeDialog dialog = new ComposeDialog(client, clickedTweet, Mode.REPLY);
-				 dialog.show(fm, "fragment_reply");				
+				ComposeDialog dialog = new ComposeDialog(client, clickedTweet,
+						Mode.RETWEET);
+				dialog.show(fm, "fragment_retweet");
 			}
-			
+
+		});
+		ibReply.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				ComposeDialog dialog = new ComposeDialog(client, clickedTweet,
+						Mode.REPLY);
+				dialog.show(fm, "fragment_reply");
+			}
+
 		});
 		Tweet tweet = this.getItem(position);
 		tvBody.setText(Html.fromHtml(tweet.getBody()));
@@ -76,7 +99,8 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 		tvTime.setText(Utils.getRelativeTimeAgo(tweet.getCreatedAt()));
 		ImageLoader imgLoader = ImageLoader.getInstance();
 		ivProfileImg.setImageResource(android.R.color.transparent);
-		imgLoader.displayImage(tweet.getUser().getProfileImageUrl(), ivProfileImg);
+		imgLoader.displayImage(tweet.getUser().getProfileImageUrl(),
+				ivProfileImg);
 		return convertView;
 	}
 

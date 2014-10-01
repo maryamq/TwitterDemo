@@ -1,4 +1,4 @@
-package com.maryamq.basictwitter;
+package com.maryamq.basictwitter.client;
 
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
@@ -45,14 +45,11 @@ public class TwitterClient extends OAuthBaseClient {
 				REST_CONSUMER_SECRET, REST_CALLBACK_URL);
 	}
 
-	public void getHomeTimeline(long maxId, AsyncHttpResponseHandler handler) {
+	public void getHomeTimelineFrom(long maxId, AsyncHttpResponseHandler handler) {
 		String apiUrl = getApiUrl("statuses/home_timeline.json");
 		RequestParams params = new RequestParams();
-		params.put("since_id", "1");
-		if (maxId > 1) {
-			params.put("max_id", maxId + "");
-		}
-		
+		params.put("max_id", maxId + "");
+		Utils.log("Get Timeline from " + maxId );
 		client.get(apiUrl, params, handler);
 		
 	}
@@ -61,14 +58,15 @@ public class TwitterClient extends OAuthBaseClient {
 		String apiUrl = getApiUrl("statuses/home_timeline.json");
 		RequestParams params = new RequestParams();
 		params.put("since_id", since + "");
+		Utils.log("Get Timeline Since " + since);
 		client.get(apiUrl, params, handler);
-		
 	}
 	
 	public void postNewTweet(String message, AsyncHttpResponseHandler handler) {
 		postNewTweet(message, -1, handler);
 	}
 	
+
 	public void postNewTweet(String message, long prevTweetId, AsyncHttpResponseHandler handler) {
 		String apiUrl = getApiUrl("statuses/update.json");
 		RequestParams params = new RequestParams();

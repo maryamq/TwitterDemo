@@ -2,6 +2,8 @@ package com.maryamq.basictwitter;
 
 import android.content.Context;
 
+import com.activeandroid.ActiveAndroid;
+import com.maryamq.basictwitter.client.TwitterClient;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -30,6 +32,9 @@ public class TwitterApplication extends com.activeandroid.app.Application {
 		.defaultDisplayImageOptions(defaultOptions)
 		.build();
 		ImageLoader.getInstance().init(config);
+		
+		// Setup active android.
+		ActiveAndroid.initialize(this);
 	}
 
 	public static TwitterClient getRestClient() {
