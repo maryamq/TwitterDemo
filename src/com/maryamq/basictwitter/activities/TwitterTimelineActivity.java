@@ -150,6 +150,7 @@ public class TwitterTimelineActivity extends FragmentActivity implements
 
 	private void fetchLatest() {
 		if (!hasInternet()) {
+			swipeContainer.setRefreshing(false);
 			return;
 		}
 		client.getHomeTimelineSince(since_id, new JsonHttpResponseHandler() {
