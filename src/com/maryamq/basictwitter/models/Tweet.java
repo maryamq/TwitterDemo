@@ -94,7 +94,8 @@ public class Tweet extends Model implements Serializable {
 	}
 
 	public static List<Tweet> loadAll() {
-		return new Select().from(Tweet.class).execute();
+		return new Select().from(Tweet.class).orderBy("tweetId DESC")
+				.execute();
 	}
 
 	public static ArrayList<Tweet> fromJSONArray(JSONArray jsonArray) {

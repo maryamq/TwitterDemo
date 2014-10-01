@@ -125,7 +125,8 @@ public class TwitterTimelineActivity extends FragmentActivity implements
 			@Override
 			public void onSuccess(JSONArray jsonArray) {
 				ArrayList<Tweet> tweets = Tweet.fromJSONArray(jsonArray);
-				aTweets.addAll(tweets);
+				aTweets.clear();
+				aTweets.addAll(Tweet.loadAll());
 				updateIds();
 			}
 
@@ -158,10 +159,13 @@ public class TwitterTimelineActivity extends FragmentActivity implements
 			@Override
 			public void onSuccess(JSONArray jsonArray) {
 				swipeContainer.setRefreshing(false);
-				ArrayList<Tweet> newTweets = Tweet.fromJSONArray(jsonArray);
+				Tweet.fromJSONArray(jsonArray);
+				List<Tweet> newTweets = Tweet.loadAll();
+				aTweets.clear();
 				for (int i = newTweets.size() - 1; i >= 0; i--) {
 					tweets.add(0, newTweets.get(i));
 				}
+				updateIds();
 				aTweets.notifyDataSetChanged();
 				updateIds();
 			}
