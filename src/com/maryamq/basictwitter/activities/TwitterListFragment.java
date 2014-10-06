@@ -17,6 +17,7 @@ import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -136,7 +137,7 @@ public class TwitterListFragment extends Fragment implements ComposeDialogListen
 		});
 		tweets = new ArrayList<Tweet>();
 		aTweets = new TweetArrayAdapter(getActivity(), tweets, client,
-				this.getFragmentManager());
+				this.getFragmentManager(), this);
 		lvTweets.setAdapter(aTweets);
 
 		setupSwipeRefreshLayout(v);
@@ -148,6 +149,7 @@ public class TwitterListFragment extends Fragment implements ComposeDialogListen
 
 	public void showComposeDialog() {
 		ComposeDialog dialog = new ComposeDialog(client);
+		dialog.setResponseHandler(this);
 		dialog.show(this.getFragmentManager(), "fragment_compose");
 	}
 

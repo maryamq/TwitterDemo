@@ -30,6 +30,7 @@ public class ComposeDialog extends DialogFragment {
 
 	private Tweet tweet;
 	private Mode mode;
+	private ComposeDialogListener listener;
 
 	private final class PostTweetClickHandler implements OnClickListener {
 		private final class PostTweetJsonResponseHandler extends
@@ -47,7 +48,6 @@ public class ComposeDialog extends DialogFragment {
 					Utils.showToast(mView.getContext(),
 							"Unable to retrieve tweet");
 				} else {
-					ComposeDialogListener listener = (ComposeDialogListener) getActivity();
 					listener.onPostNewTweet(newTweet, tweet, mode);
 					dismiss();
 				}
@@ -139,6 +139,12 @@ public class ComposeDialog extends DialogFragment {
 
 		});
 		return v;
+	}
+
+	public void setResponseHandler(ComposeDialogListener listener) {
+		this.listener = listener;
+		// TODO Auto-generated method stub
+		
 	}
 
 }

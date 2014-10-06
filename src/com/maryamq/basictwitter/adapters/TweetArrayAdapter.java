@@ -1,11 +1,9 @@
 package com.maryamq.basictwitter.adapters;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -28,18 +26,22 @@ import com.maryamq.basictwitter.activities.ProfileActivity;
 import com.maryamq.basictwitter.client.TwitterClient;
 import com.maryamq.basictwitter.client.Utils;
 import com.maryamq.basictwitter.dialog.ComposeDialog;
+import com.maryamq.basictwitter.dialog.ComposeDialog.ComposeDialogListener;
 import com.maryamq.basictwitter.dialog.ComposeDialog.Mode;
 import com.maryamq.basictwitter.models.Tweet;
 
 public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
+	
 
-	private final class FavoriteResponseHandler extends JsonHttpResponseHandler {
+	private final class FavoriteResponseHandler extends JsonHttpResponseHandler  {
 		private final Button mIbFav;
 		private final Tweet mClickedTweet;
+		
 
 		private FavoriteResponseHandler(Button ibFav, Tweet clickedTweet) {
 			mIbFav = ibFav;
 			mClickedTweet = clickedTweet;
+			
 		}
 
 		@Override
@@ -80,12 +82,14 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 
 	TwitterClient client;
 	private FragmentManager fm;
+	private ComposeDialogListener dialogListener;
 
 	public TweetArrayAdapter(Context context, List<Tweet> tweets, TwitterClient client,
-			FragmentManager fm) {
+			FragmentManager fm, ComposeDialogListener dialogListener) {
 		super(context, 0, tweets);
 		this.client = client;
 		this.fm = fm;
+		this.dialogListener = dialogListener;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -140,6 +144,7 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 			public void onClick(View v) {
 				ComposeDialog dialog = new ComposeDialog(client, clickedTweet,
 						Mode.RETWEET);
+				dialog.setResponseHandler(dialogListener);
 				dialog.show(fm, "fragment_retweet");
 			}
 
@@ -184,4 +189,5 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 		}
 		return convertView;
 	}
+
 }
