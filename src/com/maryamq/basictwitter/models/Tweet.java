@@ -50,6 +50,10 @@ public class Tweet extends Model implements Serializable {
 		return retweetCount;
 	}
 	
+	public void setRetweetCount(int count) {
+		retweetCount = count;
+	}
+	
 	public String getInReplyToUserId() {
 		return inReplyToUserId;
 	}

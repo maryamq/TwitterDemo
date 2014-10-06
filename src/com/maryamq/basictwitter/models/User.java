@@ -33,6 +33,20 @@ public class User extends Model implements Serializable {
 	@Column(name="CoverUrl")
 	private String coverUrl;
 	
+
+
+	@Column(name="FavouriteCount")
+	private int favCount;
+	
+	@Column(name="FriendsCount")
+	private int friendsCount;
+	
+	@Column(name="FollowersCount")
+	private int followersCount;
+	
+	@Column(name="TweetsCount")
+	private int tweetsCount;
+	
 	public User updateOrCreateUser() {
 		List<User> userIds = new Select().from(User.class).where("UserId=?", uid).execute();
 		if (userIds == null || userIds.size() == 0) {
@@ -44,26 +58,58 @@ public class User extends Model implements Serializable {
 		
 		return savedUser.get(0);
 	}
+	
+	public static User getUser(long id) {
+		List<User> savedUser = new Select().from(User.class).where("UserId=?", id).execute();
+		if (savedUser.size() > 0) {
+			return savedUser.get(0);
+		} else {
+			return null;
+		}
+		
+	}
 
 	public static User fromJSON(JSONObject json) {
 		// TODO Auto-generated method stub
-		User user = new User();
+				
+		
+		User user = null;
 		try {
+			long uid = json.getLong("id");
+			user = getUser(uid);
+			if (user == null) {
+			  user = new User();
+			}
+			
 			user.name = json.getString("name");
 			user.uid = json.getLong("id");
 			user.screenName = json.getString("screen_name");
 			user.profileImageUrl =  json.getString("profile_image_url");
 			user.coverUrl = !json.isNull("profile_background_image_url") ?
 					json.getString("profile_background_image_url") : "";
+					
+			// Parse additional params if available (by get credials call)
+			if (!json.isNull("friends_count")) {
+				user.friendsCount = json.getInt("friends_count");
+			}
+			if (!json.isNull("followers_count")) {
+				user.followersCount = json.getInt("followers_count");
+			}
+			
+			if (!json.isNull("favourites_count")) {
+				user.favCount = json.getInt("favourites_count");
+			}
+			
+			if (!json.isNull("statuses_count")) {
+				user.tweetsCount = json.getInt("statuses_count");
+			}
+			
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			user = null;
 		}
-		if (user == null) {
-			Log.d("Debug", "User is null");
-		}
+		
 		return user;
 	}
 
@@ -87,5 +133,20 @@ public class User extends Model implements Serializable {
 		return coverUrl;
 	}
 	
+	public int getFavCount() {
+		return favCount;
+	}
+
+	public int getFriendsCount() {
+		return friendsCount;
+	}
+
+	public int getFollowersCount() {
+		return followersCount;
+	}
+	
+	public int getTweetsCount() {
+		return tweetsCount;
+	}
 
 }

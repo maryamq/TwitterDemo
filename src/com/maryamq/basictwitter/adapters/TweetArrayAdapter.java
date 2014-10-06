@@ -31,23 +31,21 @@ import com.maryamq.basictwitter.dialog.ComposeDialog.Mode;
 import com.maryamq.basictwitter.models.Tweet;
 
 public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
-	
 
-	private final class FavoriteResponseHandler extends JsonHttpResponseHandler  {
+	private final class FavoriteResponseHandler extends JsonHttpResponseHandler {
 		private final Button mIbFav;
 		private final Tweet mClickedTweet;
-		
 
 		private FavoriteResponseHandler(Button ibFav, Tweet clickedTweet) {
 			mIbFav = ibFav;
 			mClickedTweet = clickedTweet;
-			
+
 		}
 
 		@Override
 		public void onSuccess(JSONArray jsonArray) {
-		   // no work here
-			
+			// no work here
+
 		}
 
 		@Override
@@ -55,9 +53,10 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 			// TODO Auto-generated method stub
 			Utils.showToast(mIbFav.getContext(), "Failure: " + arg1);
 			Utils.log("Failure: " + arg1);
-			boolean revertedStatus = mClickedTweet.isFavorited();
-			int favImgId = revertedStatus ? R.drawable.ic_fav_on
-					: R.drawable.ic_fav_off;
+			boolean revertedStatus = !mClickedTweet.isFavorited();
+			mClickedTweet.setIsFavorited(revertedStatus);
+			mClickedTweet.save();
+			int favImgId = revertedStatus ? R.drawable.ic_fav_on : R.drawable.ic_fav_off;
 			Drawable img = getContext().getResources().getDrawable(favImgId);
 			mIbFav.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
 			// Revert UI state
@@ -121,10 +120,12 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 			public void onClick(View v) {
 				// Setting this prematurely for perceived performance.
 				boolean newFavStatus = !clickedTweet.isFavorited();
-				int favImgId = newFavStatus ? R.drawable.ic_fav_on: R.drawable.ic_fav_off;
+				int favImgId = newFavStatus ? R.drawable.ic_fav_on
+						: R.drawable.ic_fav_off;
 				Drawable img = getContext().getResources().getDrawable(favImgId);
 				ibFav.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
 				clickedTweet.setIsFavorited(newFavStatus);
+				clickedTweet.save();
 				if (newFavStatus) {
 					client.favouriteTweet(clickedTweet.getUid(),
 							new FavoriteResponseHandler(ibFav, clickedTweet));
@@ -163,7 +164,7 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(v.getContext(), ProfileActivity.class);
-				intent.putExtra(ProfileActivity.TWEET_DATA_KEY, clickedTweet);
+				intent.putExtra(ProfileActivity.USER_DATA_KEY, clickedTweet.getUser());
 				v.getContext().startActivity(intent);
 			}
 		});

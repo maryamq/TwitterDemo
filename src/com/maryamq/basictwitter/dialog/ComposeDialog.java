@@ -1,5 +1,7 @@
 package com.maryamq.basictwitter.dialog;
 
+import java.io.Serializable;
+
 import org.json.JSONObject;
 
 import android.os.Bundle;
@@ -16,8 +18,6 @@ import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.maryamq.basictwitter.R;
-import com.maryamq.basictwitter.R.id;
-import com.maryamq.basictwitter.R.layout;
 import com.maryamq.basictwitter.client.TwitterClient;
 import com.maryamq.basictwitter.client.Utils;
 import com.maryamq.basictwitter.models.Tweet;
@@ -89,7 +89,7 @@ public class ComposeDialog extends DialogFragment {
 		this.mode = mode;
 	}
 
-	public interface ComposeDialogListener {
+	public interface ComposeDialogListener extends Serializable {
 		void onPostNewTweet(Tweet newTweet, Tweet sourceTweet, Mode mode);
 	}
 
@@ -120,9 +120,6 @@ public class ComposeDialog extends DialogFragment {
 			etNewTweet.setText("@" + tweet.getUser().getScreenName());
 		}
 		
-		if (this.mode == Mode.RETWEET) { //quote mode
-			etNewTweet.setText("@" + tweet.getUser().getScreenName() +": " + tweet.getBody());
-		}
 		
 		etNewTweet.requestFocus();
 		btnPostNewTweet = (Button) v.findViewById(R.id.btnPostNewTweet);

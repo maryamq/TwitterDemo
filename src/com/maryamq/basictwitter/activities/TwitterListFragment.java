@@ -207,6 +207,10 @@ public class TwitterListFragment extends Fragment implements ComposeDialogListen
 	@Override
 	public void onPostNewTweet(Tweet newTweet, Tweet sourceTweet, Mode mode) {
 		this.tweets.add(0, newTweet);
+		if (mode == Mode.RETWEET) {
+			sourceTweet.setRetweetCount(sourceTweet.getRetweetCount() + 1);
+			sourceTweet.save();
+		}
 		newTweet.persist();
 		aTweets.notifyDataSetChanged();
 	}
