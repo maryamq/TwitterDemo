@@ -62,6 +62,37 @@ public class TwitterClient extends OAuthBaseClient {
 		client.get(apiUrl, params, handler);
 	}
 	
+	public void getMentionsTimelineFrom(long maxId, AsyncHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("statuses/mentions_timeline.json");
+		RequestParams params = new RequestParams();
+		params.put("max_id", maxId + "");
+		client.get(apiUrl, params, handler);
+		
+	}
+	
+	public void getMentionsTimelineSince(long since, AsyncHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("statuses/mentions_timeline.json");
+		RequestParams params = new RequestParams();
+		params.put("since_id", since + "");
+		client.get(apiUrl, params, handler);
+	}
+	
+	public void getUserTimelineFrom(long maxId, long userId, AsyncHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("statuses/user_timeline.json");
+		RequestParams params = new RequestParams();
+		params.put("max_id", maxId + "");
+		params.put("user_id", userId + "");
+		client.get(apiUrl, params, handler);
+	}
+	
+	public void getUserTimelineSince(long since, long userId, AsyncHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("statuses/user_timeline.json");
+		RequestParams params = new RequestParams();
+		params.put("since_id", since + "");
+		params.put("user_id", userId + "");
+		client.get(apiUrl, params, handler);
+	}
+	
 	public void postNewTweet(String message, AsyncHttpResponseHandler handler) {
 		postNewTweet(message, -1, handler);
 	}
@@ -77,6 +108,7 @@ public class TwitterClient extends OAuthBaseClient {
 		client.post(apiUrl, params, handler);
 		
 	}
+	
 	/*
 	 * // CHANGE THIS // DEFINE METHODS for different API endpoints here public
 	 * void getInterestingnessList(AsyncHttpResponseHandler handler) { String

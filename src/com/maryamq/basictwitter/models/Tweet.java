@@ -35,7 +35,7 @@ public class Tweet extends Model implements Serializable {
 	
 	@Column(name = "media_url")
 	private String media_url;  // TODO: Create its own model
-
+	
 	public String getBody() {
 		return body;
 	}
@@ -82,7 +82,8 @@ public class Tweet extends Model implements Serializable {
 			tweet.uid = json.getLong("id");
 			tweet.createdAt = json.getString("created_at");
 			tweet.user = User.fromJSON(json.getJSONObject("user"));
-			// Get media url
+			
+			//Get media url
 			tweet.media_url = getMediaUrl(json);
 			tweet.persist();
 		} catch (JSONException e) {
@@ -99,7 +100,6 @@ public class Tweet extends Model implements Serializable {
 	}
 
 	public static ArrayList<Tweet> fromJSONArray(JSONArray jsonArray) {
-		// TODO Auto-generated method stub
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>();
 		ActiveAndroid.beginTransaction();
 		for (int i = 0; i < jsonArray.length(); i++) {
@@ -107,7 +107,6 @@ public class Tweet extends Model implements Serializable {
 			try {
 				json = jsonArray.getJSONObject(i);
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				continue;
 			}

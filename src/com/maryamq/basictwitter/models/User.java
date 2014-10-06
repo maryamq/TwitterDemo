@@ -30,6 +30,9 @@ public class User extends Model implements Serializable {
 	@Column(name="ProfileImageUrl")
 	private String profileImageUrl;
 	
+	@Column(name="CoverUrl")
+	private String coverUrl;
+	
 	public User updateOrCreateUser() {
 		List<User> userIds = new Select().from(User.class).where("UserId=?", uid).execute();
 		if (userIds == null || userIds.size() == 0) {
@@ -50,6 +53,8 @@ public class User extends Model implements Serializable {
 			user.uid = json.getLong("id");
 			user.screenName = json.getString("screen_name");
 			user.profileImageUrl =  json.getString("profile_image_url");
+			user.coverUrl = !json.isNull("profile_background_image_url") ?
+					json.getString("profile_background_image_url") : "";
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -76,6 +81,10 @@ public class User extends Model implements Serializable {
 
 	public String getProfileImageUrl() {
 		return profileImageUrl;
+	}
+	
+	public String getCoverUrl() {
+		return coverUrl;
 	}
 	
 

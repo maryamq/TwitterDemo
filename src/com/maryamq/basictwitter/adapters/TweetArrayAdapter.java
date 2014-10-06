@@ -20,6 +20,7 @@ import com.maryamq.basictwitter.R;
 import com.maryamq.basictwitter.R.id;
 import com.maryamq.basictwitter.R.layout;
 import com.maryamq.basictwitter.activities.DetailActivity;
+import com.maryamq.basictwitter.activities.ProfileActivity;
 import com.maryamq.basictwitter.client.TwitterClient;
 import com.maryamq.basictwitter.client.Utils;
 import com.maryamq.basictwitter.dialog.ComposeDialog;
@@ -97,16 +98,22 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 			}
 
 		});
+		
+		ivProfileImg.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(v.getContext(), ProfileActivity.class);
+				intent.putExtra(ProfileActivity.TWEET_DATA_KEY, clickedTweet);
+				v.getContext().startActivity(intent);
+			}
+		});
 		Tweet tweet = this.getItem(position);
 		tvBody.setText(Html.fromHtml(tweet.getBody()));
 		tvScreenName.setText("@" + tweet.getUser().getScreenName());
 		tvName.setText(tweet.getUser().getName());
 		tvName.setTypeface(null, Typeface.BOLD);
 		tvTime.setText(Utils.getRelativeTimeAgo(tweet.getCreatedAt()));
-		ImageLoader imgLoader = ImageLoader.getInstance();
-		ivProfileImg.setImageResource(android.R.color.transparent);
-		imgLoader.displayImage(tweet.getUser().getProfileImageUrl(),
-				ivProfileImg);
+		Utils.loadImage(ivProfileImg, tweet.getUser().getProfileImageUrl());
 
 		// SHow media
 		ImageView ivMedia = (ImageView)convertView.findViewById(R.id.ivMedia);
@@ -115,7 +122,7 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 		String mediaUrl = tweet.getMediaUrl();
 		Utils.log("Twitter url: " + mediaUrl);
 		if (mediaUrl != null && !mediaUrl.isEmpty()) {
-			imgLoader.displayImage(mediaUrl, ivMedia);
+			Utils.loadImage(ivMedia, mediaUrl);
 			ivMedia.setVisibility(View.VISIBLE);
 		} else {
 			ivMedia.setVisibility(View.GONE);
