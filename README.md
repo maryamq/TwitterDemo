@@ -24,5 +24,6 @@ The following advanced user stories are optional:
 
 
 ![Video Walkthrough](story.gif)
+![Video Walkthrough](story2.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
