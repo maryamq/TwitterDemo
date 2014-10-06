@@ -47,10 +47,12 @@ public class TwitterListFragment extends Fragment implements ComposeDialogListen
 	private Context applicationContext;
 
 	public interface IDataFetcher extends Serializable {
+		public List<Tweet> getInitialTweets();
 		public void getMoreTweets(Fragment fragment, long from_id, JsonHttpResponseHandler responseHandler);
 
 		public void getLastestTweets(Fragment fragment, long since_id,
 				JsonHttpResponseHandler responseHandler);
+		public void persist(List<Tweet> tweets);
 	}
 	
 
@@ -59,9 +61,10 @@ public class TwitterListFragment extends Fragment implements ComposeDialogListen
 		@SuppressLint("NewApi")
 		@Override
 		public void onSuccess(JSONArray jsonArray) {
-			ArrayList<Tweet> tweets = Tweet.fromJSONArray(jsonArray);
-			aTweets.addAll(tweets);
+			ArrayList<Tweet> newTweets = Tweet.fromJSONArray(jsonArray);
+			aTweets.addAll(newTweets);
 			updateIds();
+			((IDataFetcher)getActivity()).persist(newTweets);
 		}
 
 		@Override
@@ -69,7 +72,7 @@ public class TwitterListFragment extends Fragment implements ComposeDialogListen
 			// TODO Auto-generated method stub
 			Utils.showToast(applicationContext, "Failure: " + arg1);
 			Utils.log("Failure: " + arg1);
-			// Handle known errors more elegantly
+			// Handle known errors more elegantl.
 			super.onFailure(arg0, arg1);
 		}
 	}
@@ -80,11 +83,17 @@ public class TwitterListFragment extends Fragment implements ComposeDialogListen
 			swipeContainer.setRefreshing(false);
 			List<Tweet> newTweets =Tweet.fromJSONArray(jsonArray);
 			for (int i = newTweets.size() - 1; i >= 0; i--) {
-				tweets.add(0, newTweets.get(i));
+				// de dup. make sure we don't add duplciate tweets.
+				Tweet aTweet = newTweets.get(i);
+				Tweet existingTweet = Tweet.getTweet(aTweet.getUid());
+				if (existingTweet == null || !tweets.contains(existingTweet)) {
+					tweets.add(0, newTweets.get(i));
+				}
 			}
 			updateIds();
 			aTweets.notifyDataSetChanged();
 			updateIds();
+			((IDataFetcher)getActivity()).persist(newTweets);
 		}
 
 		@Override
@@ -135,7 +144,8 @@ public class TwitterListFragment extends Fragment implements ComposeDialogListen
 			}
 
 		});
-		tweets = new ArrayList<Tweet>();
+		// Load existing tweets;
+		tweets = ((IDataFetcher)getActivity()).getInitialTweets();
 		aTweets = new TweetArrayAdapter(getActivity(), tweets, client,
 				this.getFragmentManager(), this);
 		lvTweets.setAdapter(aTweets);
@@ -189,9 +199,8 @@ public class TwitterListFragment extends Fragment implements ComposeDialogListen
 			swipeContainer.setRefreshing(false);
 			return;
 		}
-		((IDataFetcher)getActivity()).getLastestTweets(TwitterListFragment.this, since_id, new TimelineSinceResponseHandler());
-		// client.getHomeTimelineSince(since_id, new
-		// HomeTimelineSinceResponseHandler());
+		((IDataFetcher)getActivity()).getLastestTweets(
+				TwitterListFragment.this, since_id, new TimelineSinceResponseHandler());
 	}
 
 	private void updateIds() {
@@ -211,7 +220,13 @@ public class TwitterListFragment extends Fragment implements ComposeDialogListen
 			sourceTweet.setRetweetCount(sourceTweet.getRetweetCount() + 1);
 			sourceTweet.save();
 		}
-		newTweet.persist();
+		List<Tweet> tempTweets= new ArrayList<Tweet>();
+		tempTweets.add(newTweet);
+		((IDataFetcher)getActivity()).persist(tempTweets);
 		aTweets.notifyDataSetChanged();
+	}
+
+	public void addTweet(Tweet newTweet) {
+		onPostNewTweet(newTweet, null, Mode.COMPOSE);
 	}
 }

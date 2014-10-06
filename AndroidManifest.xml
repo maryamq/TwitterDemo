@@ -54,12 +54,16 @@
             android:name="com.maryamq.basictwitter.activities.TwitterTimelineActivity"
             android:label="@string/title_activity_timeline" >
         </activity>
-                <activity
+        <activity
             android:name="com.maryamq.basictwitter.activities.DetailActivity"
             android:label="@string/title_activity_timeline" >
         </activity>
-                <activity
+        <activity
             android:name="com.maryamq.basictwitter.activities.ProfileActivity"
+            android:label="@string/title_activity_profile" >
+        </activity>
+        <activity
+            android:name="com.maryamq.basictwitter.activities.SearchActivity"
             android:label="@string/title_activity_profile" >
         </activity>
     </application>

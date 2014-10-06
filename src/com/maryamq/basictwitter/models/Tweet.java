@@ -16,6 +16,7 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Column.ForeignKeyAction;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
+import com.maryamq.basictwitter.TwitterApplication;
 import com.maryamq.basictwitter.client.Utils;
 
 @Table(name = "Tweet", id = BaseColumns._ID)
@@ -39,6 +40,9 @@ public class Tweet extends Model implements Serializable {
 	@Column(name = "favorited")
 	private boolean favorited;
 	
+	@Column(name = "user_mentioned")
+	private boolean isUserMentioned;
+	
 
 	@Column(name = "in_reply_to_user")
 	private String inReplyToUserId;
@@ -60,6 +64,10 @@ public class Tweet extends Model implements Serializable {
 	
 	public boolean isFavorited() {
 		return favorited;
+	}
+	
+	public boolean isUserMentioned() {
+		return isUserMentioned;
 	}
 	
 	public void setIsFavorited(boolean value) {
@@ -104,10 +112,37 @@ public class Tweet extends Model implements Serializable {
         }
 		return "";
 	}
+	
+	public static Tweet getTweet(long id) {
+		List<Tweet> savedTweets = new Select().from(Tweet.class).where("tweetId=?", id).execute();
+		if (savedTweets.size() > 0) {
+			return savedTweets.get(0);
+		} else {
+			return null;
+		}
+	}
+	
+	public static List<Tweet> getMentionedTweets() {
+		return new Select().from(Tweet.class).where("user_mentioned=?", true).execute();
+	}
+
+
 	public static Tweet fromJSON(JSONObject json) {
-		Tweet tweet = new Tweet();
+		return fromJSON(json, true);
+	}
+	
+	public static Tweet fromJSON(JSONObject json, boolean persist) {
+		Tweet tweet = null;
+		
 		// Extract values form JSON
 		try {
+			long id = json.getLong("id");
+			tweet = getTweet(id);
+			if (tweet == null) {
+				tweet = new Tweet();
+				tweet.uid = id;
+			}
+			
 			tweet.body = json.getString("text");
 			tweet.uid = json.getLong("id");
 			tweet.createdAt = json.getString("created_at");
@@ -115,12 +150,25 @@ public class Tweet extends Model implements Serializable {
 			tweet.favorited = json.getBoolean("favorited");
 			tweet.inReplyToUserId = json.isNull("in_reply_to_screen_name") ? "" :
 				json.getString("in_reply_to_screen_name");
-			Utils.log("In reply to " + tweet.inReplyToUserId);
 			tweet.retweetCount = json.getInt("retweet_count");
-			
 			//Get media url
 			tweet.media_url = getMediaUrl(json);
-			tweet.persist();
+			
+			if (!json.isNull("user_mentions")) {
+				JSONArray usersMentioned = json.getJSONArray("user_mentions");
+				tweet.isUserMentioned = false;
+				if (TwitterApplication.getRestClient().getAccount() != null) {
+					long accountId = TwitterApplication.getRestClient().getAccount().getUid();
+					for (int j=0; j<usersMentioned.length(); j++) {
+						Utils.log("User: " + usersMentioned.getJSONObject(j).toString());
+						if (accountId == usersMentioned.getJSONObject(j).getLong("id")) {
+							tweet.isUserMentioned = true;
+							break;
+						}
+						
+					}
+				}
+			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -155,5 +203,10 @@ public class Tweet extends Model implements Serializable {
 		ActiveAndroid.endTransaction();
 		return tweets;
 
+	}
+
+	public void setIsMentioned(boolean b) {
+		this.isUserMentioned = b;
+		
 	}
 }

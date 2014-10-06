@@ -72,6 +72,10 @@ public class FragmentTabListener<T extends Fragment> implements TabListener {
         sft.commit();
     }
  
+    public Fragment getFragment() {
+    	return mFragment;
+    }
+    
     public void onTabReselected(Tab tab, android.app.FragmentTransaction ft) {
       // User selected the already selected tab. Usually do nothing.
     }

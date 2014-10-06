@@ -1,9 +1,14 @@
 package com.maryamq.basictwitter;
 
+import org.json.JSONObject;
+
 import android.content.Context;
 
 import com.activeandroid.ActiveAndroid;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.maryamq.basictwitter.client.TwitterClient;
+import com.maryamq.basictwitter.client.Utils;
+import com.maryamq.basictwitter.models.User;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -25,19 +30,25 @@ public class TwitterApplication extends com.activeandroid.app.Application {
 		super.onCreate();
 		TwitterApplication.context = this;
 
-		// Create global configuration and initialize ImageLoader with this configuration
-		DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().
-				cacheInMemory().cacheOnDisc().build();
-		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-		.defaultDisplayImageOptions(defaultOptions)
-		.build();
+		// Create global configuration and initialize ImageLoader with this
+		// configuration
+		DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+				.cacheInMemory().cacheOnDisc().build();
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+				getApplicationContext()).defaultDisplayImageOptions(defaultOptions)
+				.build();
 		ImageLoader.getInstance().init(config);
-		
+
 		// Setup active android.
 		ActiveAndroid.initialize(this);
+
 	}
 
 	public static TwitterClient getRestClient() {
-		return (TwitterClient) TwitterClient.getInstance(TwitterClient.class, TwitterApplication.context);
+		TwitterClient client = (TwitterClient) TwitterClient.getInstance(
+				TwitterClient.class, TwitterApplication.context);
+
+		return client;
 	}
+
 }
