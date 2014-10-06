@@ -172,8 +172,6 @@ public class TwitterListFragment extends Fragment implements ComposeDialogListen
 			return;
 		}
 		((IDataFetcher)getActivity()).getMoreTweets(TwitterListFragment.this, maxIdValue, new TimelineFromResponseHandler());
-		// client.getHomeTimelineFrom(maxIdValue, new
-		// HomeTimelineFromResponseHandler());
 	}
 
 	private boolean hasInternet() {

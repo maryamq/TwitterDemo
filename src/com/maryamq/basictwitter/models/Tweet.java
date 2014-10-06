@@ -58,6 +58,10 @@ public class Tweet extends Model implements Serializable {
 		return favorited;
 	}
 	
+	public void setIsFavorited(boolean value) {
+		favorited = value;
+	}
+	
 	public String getBody() {
 		return body;
 	}
@@ -105,8 +109,9 @@ public class Tweet extends Model implements Serializable {
 			tweet.createdAt = json.getString("created_at");
 			tweet.user = User.fromJSON(json.getJSONObject("user"));
 			tweet.favorited = json.getBoolean("favorited");
-			tweet.inReplyToUserId = json.isNull("in_reply_to_user_id_str") ? "" :
-				json.getString("in_reply_to_user_id_str");
+			tweet.inReplyToUserId = json.isNull("in_reply_to_screen_name") ? "" :
+				json.getString("in_reply_to_screen_name");
+			Utils.log("In reply to " + tweet.inReplyToUserId);
 			tweet.retweetCount = json.getInt("retweet_count");
 			
 			//Get media url

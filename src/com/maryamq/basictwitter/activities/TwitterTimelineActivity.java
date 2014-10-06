@@ -19,6 +19,7 @@ import com.maryamq.basictwitter.R;
 import com.maryamq.basictwitter.TwitterApplication;
 import com.maryamq.basictwitter.activities.TwitterListFragment.IDataFetcher;
 import com.maryamq.basictwitter.client.TwitterClient;
+import com.maryamq.basictwitter.dialog.ComposeDialog;
 import com.maryamq.basictwitter.listeners.FragmentTabListener;
 import com.maryamq.basictwitter.models.Tweet;
 
@@ -26,7 +27,6 @@ public class TwitterTimelineActivity extends FragmentActivity implements IDataFe
 	TwitterClient client = TwitterApplication.getRestClient();
 	Tab homeTab;
 	Tab mentionsTab;
-	
 	
 	
 	@Override
@@ -79,7 +79,8 @@ public class TwitterTimelineActivity extends FragmentActivity implements IDataFe
 	public boolean onOptionsItemSelected(MenuItem item) {
 
 		if (item.getItemId() == R.id.miCompose) {
-			// Show compose dialog
+			ComposeDialog dialog = new ComposeDialog(client);
+			dialog.show(this.getSupportFragmentManager(), "fragment_compose");
 		}
 
 		return true;
@@ -92,7 +93,6 @@ public class TwitterTimelineActivity extends FragmentActivity implements IDataFe
 			client.getHomeTimelineFrom(fromId, responseHandler);
 		} else {
 			client.getMentionsTimelineFrom(fromId, responseHandler);
-			
 		}
 		
 	}

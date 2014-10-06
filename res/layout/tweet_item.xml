@@ -71,19 +71,34 @@
         android:layout_below="@+id/ivMedia"
         android:layout_marginTop="5dp" >
 
-        <ImageButton
+        <Button
+            android:id="@+id/ibFav"
+            android:layout_width="82dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableLeft="@drawable/ic_fav_off"
+            android:drawablePadding="-15dp"
+            android:gravity="left|center"
+            android:textSize="10sp" />
+
+        <Button
             android:id="@+id/ibRetweet"
             android:layout_width="82dp"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:src="@drawable/ic_action_retweet" />
+            android:drawablePadding="-8dp"
+            android:drawableLeft="@drawable/ic_action_retweet"
+            android:gravity="left|center"
+             android:textSize="10sp" 
+            android:text="rewteet" />
 
-        <ImageButton
+        <Button
             android:id="@+id/ibReply"
             android:layout_width="82dp"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:src="@drawable/ic_action_reply" />
+            android:gravity="left|center"
+            android:drawableLeft="@drawable/ic_action_reply" />
     </LinearLayout>
 
 </RelativeLayout>
