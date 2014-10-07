@@ -3,6 +3,13 @@ package com.maryamq.basictwitter.activities;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.maryamq.basictwitter.R;
 import com.maryamq.basictwitter.TwitterApplication;
@@ -10,13 +17,6 @@ import com.maryamq.basictwitter.activities.TwitterListFragment.IDataFetcher;
 import com.maryamq.basictwitter.client.TwitterClient;
 import com.maryamq.basictwitter.models.Tweet;
 import com.maryamq.basictwitter.models.User;
-
-import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 
 public class ProfileActivity extends FragmentActivity implements IDataFetcher {
 	public static final String USER_DATA_KEY = "user";
@@ -36,6 +36,7 @@ public class ProfileActivity extends FragmentActivity implements IDataFetcher {
 		ft.replace(R.id.flTopCover, new CoverFragment(user));
 		ft.replace(R.id.flTweets, new TwitterListFragment());
 		ft.commit();
+		
 	}
 
 	@Override

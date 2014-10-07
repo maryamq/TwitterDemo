@@ -46,6 +46,13 @@ public class User extends Model implements Serializable {
 	
 	@Column(name="TweetsCount")
 	private int tweetsCount;
+
+	@Column(name="Tagline")
+	private String tagline;
+	
+	public String getTagline() {
+		return tagline;
+	}
 	
 	public User updateOrCreateUser() {
 		List<User> userIds = new Select().from(User.class).where("UserId=?", uid).execute();
@@ -87,6 +94,8 @@ public class User extends Model implements Serializable {
 			user.profileImageUrl =  json.getString("profile_image_url");
 			user.coverUrl = !json.isNull("profile_background_image_url") ?
 					json.getString("profile_background_image_url") : "";
+			user.tagline = !json.isNull("description") ? 
+					json.getString("description"): "";
 					
 			// Parse additional params if available (by get credials call)
 			if (!json.isNull("friends_count")) {

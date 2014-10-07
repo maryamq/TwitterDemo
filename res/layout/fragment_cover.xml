@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-     android:background="@color/background"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical" >
 
     <FrameLayout
@@ -16,46 +16,13 @@
             android:scaleType="fitXY"
             android:src="@drawable/ic_launcher" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:orientation="vertical" >
+<android.support.v4.view.ViewPager
+    android:id="@+id/vpPager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
-            <FrameLayout
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:background="@android:color/white" >
-
-                <ImageView
-                    android:id="@+id/ivProfilePic"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_launcher" />
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/tvUserName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="8dp"
-                android:text="Large Text"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@android:color/white" />
-
-            <TextView
-                android:id="@+id/tvHandle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="2dp"
-                android:text="TextView"
-                android:textColor="@android:color/white" />
-        </LinearLayout>
+</android.support.v4.view.ViewPager>
+     
     </FrameLayout>
 
     <LinearLayout
@@ -65,7 +32,6 @@
 
         <TextView
             android:id="@+id/tvTweets"
-            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="-1dp"
@@ -73,22 +39,22 @@
             android:background="@drawable/square_shape"
             android:padding="5dp"
             android:text="1000\nTweets"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tvFollowing"
-            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/square_shape"
             android:padding="5dp"
             android:text="100\nFollowing"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tvFollowers"
-            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginRight="-1dp"
@@ -96,7 +62,8 @@
             android:background="@drawable/square_shape"
             android:padding="5dp"
             android:text="100\nFollowing"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
     </LinearLayout>
 
     <View
