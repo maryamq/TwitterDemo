@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+     android:background="@color/background"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
@@ -59,34 +60,49 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@android:color/black" >
+        android:layout_height="wrap_content"
+        android:background="@color/background" >
 
         <TextView
             android:id="@+id/tvTweets"
-            android:layout_width="100dp"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@android:color/white"
+            android:layout_marginLeft="-1dp"
+            android:layout_weight="1"
+            android:background="@drawable/square_shape"
+            android:padding="5dp"
             android:text="1000\nTweets"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
             android:id="@+id/tvFollowing"
-             android:layout_width="100dp"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@android:color/white"
+            android:layout_weight="1"
+            android:background="@drawable/square_shape"
+            android:padding="5dp"
             android:text="100\nFollowing"
-            android:layout_marginRight="5dp"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
             android:id="@+id/tvFollowers"
-             android:layout_width="100dp"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@android:color/white"
+            android:layout_marginRight="-1dp"
+            android:layout_weight="1"
+            android:background="@drawable/square_shape"
+            android:padding="5dp"
             android:text="100\nFollowing"
-            android:layout_marginRight="5dp"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceSmall" />
     </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/light_grey2" />
 
 </LinearLayout>

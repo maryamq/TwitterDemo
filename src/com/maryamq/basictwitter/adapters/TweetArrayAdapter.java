@@ -199,8 +199,9 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 		Utils.loadImage(ivProfileImg, tweet.getUser().getProfileImageUrl());
 		if (tweet.isRetweeted()) {
 			tvRetweeted.setText(tweet.getUser().getName() + " retweeted");
+			tvRetweeted.setVisibility(View.VISIBLE);
 		} else {
-			tvRetweeted.setVisibility(View.GONE);
+			tvRetweeted.setVisibility(View.INVISIBLE);
 		}
 
 		// SHow media

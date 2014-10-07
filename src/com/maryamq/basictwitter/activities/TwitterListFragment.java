@@ -217,13 +217,17 @@ public class TwitterListFragment extends Fragment implements ComposeDialogListen
 		
 		if (mode == Mode.RETWEET) {
 			sourceTweet.setRetweetCount(sourceTweet.getRetweetCount() + 1);
-		} else {
-			this.tweets.add(0, newTweet);
-			aTweets.notifyDataSetChanged();
+			newTweet.setRetweeted(true);
+			newTweet.setIsHomeTimeline(true);
 		}
+		this.tweets.add(0, newTweet);
+		aTweets.notifyDataSetChanged();
 		
 		List<Tweet> tempTweets= new ArrayList<Tweet>();
-		tempTweets.add(sourceTweet);
+		tempTweets.add(newTweet);
+		tempTweets.add(sourceTweet); // we updated the retweet count
+		// Note that twitter client doesn ot show retweets in timeline
+		// but doing it here for demo.
 		((IDataFetcher)getActivity()).persist(tempTweets);
 		Utils.showToast(getActivity(), "Retweeted!");
 		

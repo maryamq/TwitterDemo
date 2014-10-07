@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:padding="5dp" >
+    android:paddingTop="1dp" >
     <ImageView
         android:id="@+id/ivProfileImg"
         android:layout_width="40dp"
@@ -40,6 +40,7 @@
         android:layout_alignRight="@+id/linearLayout1"
         android:layout_below="@+id/tvRetweeted"
         android:text="1hr Ago"
+        android:layout_marginRight="3dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#8D8D8D" />
     
@@ -59,12 +60,11 @@
         android:id="@+id/ivMedia"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-   
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/tvBody"
         android:adjustViewBounds="true"
-        android:padding="5dp"
+        android:paddingTop="5dp"
         android:scaleType="fitXY"
         android:visibility="gone" />
 

@@ -54,15 +54,12 @@ public class CoverFragment extends Fragment {
 
 		tvUserName.setText(user.getName());
 		
-		String htmlText = "%s<br/><span style='color:#8D8D8D'>%s</span>";
+		String htmlText = "<b>%s</b><br/><font color='color:##8899a6'>%s</font>";
 		tvTweets.setText(Html.fromHtml(String.format(htmlText, user.getTweetsCount(), "TWEETS")));
-		tvTweets.setWidth(display.getWidth()/3);
-		
+
 		tvFollowers.setText(Html.fromHtml(String.format(htmlText, user.getFollowersCount(), "FOLLOWERS")));
-		tvFollowers.setWidth(display.getWidth()/3);
 		
 		tvFollowing.setText(Html.fromHtml(String.format(htmlText, user.getFriendsCount(), "FOLLOWING")));
-		tvFollowing.setWidth(display.getWidth()/3);
 	
 		return v;
 	}
