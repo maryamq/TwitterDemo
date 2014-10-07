@@ -3,6 +3,7 @@ package com.maryamq.basictwitter.adapters;
 import java.util.List;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.Intent;
@@ -104,6 +105,8 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 		TextView tvBody = (TextView) convertView.findViewById(R.id.tvBody);
 		TextView tvName = (TextView) convertView.findViewById(R.id.tvTweeterName);
 		TextView tvTime = (TextView) convertView.findViewById(R.id.tvTime);
+		TextView tvRetweeted = (TextView) convertView.findViewById(R.id.tvRetweeted);
+		
 		Button ibRetweet = (Button) convertView.findViewById(R.id.ibRetweet);
 		Button ibReply = (Button) convertView.findViewById(R.id.ibReply);
 		final Button ibFav = (Button) convertView.findViewById(R.id.ibFav);
@@ -143,10 +146,28 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 
 			@Override
 			public void onClick(View v) {
+				/*
 				ComposeDialog dialog = new ComposeDialog(client, clickedTweet,
 						Mode.RETWEET);
 				dialog.setResponseHandler(dialogListener);
-				dialog.show(fm, "fragment_retweet");
+				dialog.show(fm, "fragment_retweet");*/
+				client.retweet(clickedTweet.getUid(), new JsonHttpResponseHandler() {
+					@Override
+					public void onSuccess(int arg0, JSONObject json) {
+						// TODO Auto-generated method stub
+						Tweet newTweet = Tweet.fromJSON(json);
+						dialogListener.onPostNewTweet(newTweet, clickedTweet, Mode.RETWEET);
+						
+					}
+					
+					@Override
+					public void onFailure(Throwable arg0, String arg1) {
+						// TODO Auto-generated method stub
+						Utils.log("Retweet failed!");
+						super.onFailure(arg0, arg1);
+					}
+					
+				});
 			}
 
 		});
@@ -155,6 +176,7 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 			@Override
 			public void onClick(View v) {
 				ComposeDialog dialog = new ComposeDialog(client, clickedTweet, Mode.REPLY);
+				dialog.setResponseHandler(dialogListener);
 				dialog.show(fm, "fragment_reply");
 			}
 
@@ -175,6 +197,11 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 		tvName.setTypeface(null, Typeface.BOLD);
 		tvTime.setText(Utils.getRelativeTimeAgo(tweet.getCreatedAt()));
 		Utils.loadImage(ivProfileImg, tweet.getUser().getProfileImageUrl());
+		if (tweet.isRetweeted()) {
+			tvRetweeted.setText(tweet.getUser().getName() + " retweeted");
+		} else {
+			tvRetweeted.setVisibility(View.GONE);
+		}
 
 		// SHow media
 		ImageView ivMedia = (ImageView) convertView.findViewById(R.id.ivMedia);

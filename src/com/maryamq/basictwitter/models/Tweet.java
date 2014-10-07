@@ -38,11 +38,13 @@ public class Tweet extends Model implements Serializable {
 	private String media_url;  // TODO: Create its own model
 	
 	@Column(name = "favorited")
-	private boolean favorited;
+	private boolean favorited = false;
 	
 	@Column(name = "user_mentioned")
 	private boolean isUserMentioned;
 	
+	@Column(name = "is_home_timeline")
+	private boolean isInHomeTimeline;
 
 	@Column(name = "in_reply_to_user")
 	private String inReplyToUserId;
@@ -50,6 +52,17 @@ public class Tweet extends Model implements Serializable {
 	@Column(name = "retweet_count")
 	private int retweetCount;
 	
+	@Column(name = "retweeted")
+	private boolean retweeted;
+	
+	public boolean isRetweeted() {
+		return retweeted;
+	}
+
+	public void setRetweeted(boolean retweeted) {
+		this.retweeted = retweeted;
+	}
+
 	public int getRetweetCount() {
 		return retweetCount;
 	}
@@ -68,6 +81,10 @@ public class Tweet extends Model implements Serializable {
 	
 	public boolean isUserMentioned() {
 		return isUserMentioned;
+	}
+	
+	public boolean isInHomeTimeline() {
+		return isInHomeTimeline;
 	}
 	
 	public void setIsFavorited(boolean value) {
@@ -125,6 +142,10 @@ public class Tweet extends Model implements Serializable {
 	public static List<Tweet> getMentionedTweets() {
 		return new Select().from(Tweet.class).where("user_mentioned=?", true).execute();
 	}
+	
+	public static List<Tweet> getHomeTimelineTweets() {
+		return new Select().from(Tweet.class).where("is_home_timeline=?", true).execute();
+	}
 
 
 	public static Tweet fromJSON(JSONObject json) {
@@ -148,6 +169,7 @@ public class Tweet extends Model implements Serializable {
 			tweet.createdAt = json.getString("created_at");
 			tweet.user = User.fromJSON(json.getJSONObject("user"));
 			tweet.favorited = json.getBoolean("favorited");
+			tweet.retweeted = json.getBoolean("retweeted");
 			tweet.inReplyToUserId = json.isNull("in_reply_to_screen_name") ? "" :
 				json.getString("in_reply_to_screen_name");
 			tweet.retweetCount = json.getInt("retweet_count");
@@ -207,6 +229,11 @@ public class Tweet extends Model implements Serializable {
 
 	public void setIsMentioned(boolean b) {
 		this.isUserMentioned = b;
+		
+	}
+
+	public void setIsHomeTimeline(boolean b) {
+		this.isInHomeTimeline = true;
 		
 	}
 }

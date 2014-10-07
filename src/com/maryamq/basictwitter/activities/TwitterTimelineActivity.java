@@ -149,7 +149,7 @@ public class TwitterTimelineActivity extends FragmentActivity implements IDataFe
 	public List<Tweet> getInitialTweets() {
 		// TODO Auto-generated method stub
 		if (getActionBar().getSelectedTab() == this.homeTab) {
-			return Tweet.loadAll();
+			return Tweet.getHomeTimelineTweets();
 		} else {
 			return Tweet.getMentionedTweets();
 		}
@@ -160,6 +160,7 @@ public class TwitterTimelineActivity extends FragmentActivity implements IDataFe
 	public void persist(List<Tweet> tweets) {
 		if (getActionBar().getSelectedTab() == this.homeTab) {
 			for (Tweet t: tweets) {
+				t.setIsHomeTimeline(true);
 				t.persist();
 			}	
 		} else {

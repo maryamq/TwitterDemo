@@ -92,7 +92,6 @@ public class TwitterListFragment extends Fragment implements ComposeDialogListen
 			}
 			updateIds();
 			aTweets.notifyDataSetChanged();
-			updateIds();
 			((IDataFetcher)getActivity()).persist(newTweets);
 		}
 
@@ -215,15 +214,19 @@ public class TwitterListFragment extends Fragment implements ComposeDialogListen
 
 	@Override
 	public void onPostNewTweet(Tweet newTweet, Tweet sourceTweet, Mode mode) {
-		this.tweets.add(0, newTweet);
+		
 		if (mode == Mode.RETWEET) {
 			sourceTweet.setRetweetCount(sourceTweet.getRetweetCount() + 1);
-			sourceTweet.save();
+		} else {
+			this.tweets.add(0, newTweet);
+			aTweets.notifyDataSetChanged();
 		}
+		
 		List<Tweet> tempTweets= new ArrayList<Tweet>();
-		tempTweets.add(newTweet);
+		tempTweets.add(sourceTweet);
 		((IDataFetcher)getActivity()).persist(tempTweets);
-		aTweets.notifyDataSetChanged();
+		Utils.showToast(getActivity(), "Retweeted!");
+		
 	}
 
 	public void addTweet(Tweet newTweet) {

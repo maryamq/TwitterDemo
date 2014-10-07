@@ -87,6 +87,7 @@ public class ComposeDialog extends DialogFragment {
 		this.client = client;
 		this.tweet = tweet;
 		this.mode = mode;
+		
 	}
 
 	public interface ComposeDialogListener extends Serializable {
@@ -118,7 +119,7 @@ public class ComposeDialog extends DialogFragment {
 		etNewTweet = (EditText) v.findViewById(R.id.etNewTweet);
 		if (this.mode == Mode.REPLY) {
 			etNewTweet.setText("@" + tweet.getUser().getScreenName());
-		}
+		} 
 		
 		
 		etNewTweet.requestFocus();

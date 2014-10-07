@@ -2,26 +2,47 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:padding="5dp" >
-
     <ImageView
         android:id="@+id/ivProfileImg"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="10dp"
+        android:layout_below="@+id/tvRetweeted"
+        android:layout_marginRight="5dp"
         android:src="@drawable/ic_launcher" />
 
     <TextView
         android:id="@+id/tvTweeterName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/tvRetweeted"
         android:layout_toRightOf="@+id/ivProfileImg"
-        android:paddingRight="5dp"
+        android:layout_marginRight="5dp"
         android:text="User" />
 
+        <TextView
+        android:id="@+id/tvScreenName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvTweeterName"
+        android:layout_alignBottom="@+id/tvTweeterName"
+        android:layout_toRightOf="@+id/tvTweeterName"
+        android:text="Handle"
+        android:textColor="#8D8D8D"
+         />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/linearLayout1"
+        android:layout_below="@+id/tvRetweeted"
+        android:text="1hr Ago"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#8D8D8D" />
+    
     <TextView
         android:id="@+id/tvBody"
         android:layout_width="wrap_content"
@@ -31,31 +52,14 @@
         android:autoLink="all"
         android:linksClickable="true"
         android:text="Tweet" />
-
-    <TextView
-        android:id="@+id/tvScreenName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/tvTweeterName"
-        android:text="Handle"
-        android:textColor="#8D8D8D" />
-
-    <TextView
-        android:id="@+id/tvTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvScreenName"
-        android:layout_alignParentRight="true"
-        android:text="1hr Ago"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#8D8D8D" />
+    
+    
 
     <ImageView
         android:id="@+id/ivMedia"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_alignLeft="@+id/tvBody"
+   
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/tvBody"
@@ -65,11 +69,12 @@
         android:visibility="gone" />
 
     <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/ivMedia"
-        android:layout_marginTop="5dp" >
+        android:layout_marginTop="0dp" >
 
         <Button
             android:id="@+id/ibFav"
@@ -86,19 +91,32 @@
             android:layout_width="82dp"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:drawablePadding="-8dp"
             android:drawableLeft="@drawable/ic_action_retweet"
+            android:drawablePadding="-8dp"
             android:gravity="left|center"
-             android:textSize="10sp" 
-            android:text="rewteet" />
+            android:text="rewteet"
+            android:textSize="10sp" />
 
         <Button
             android:id="@+id/ibReply"
             android:layout_width="82dp"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:gravity="left|center"
-            android:drawableLeft="@drawable/ic_action_reply" />
+            android:textSize="10sp"
+            android:drawableLeft="@drawable/ic_action_reply"
+            android:gravity="left|center" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvRetweeted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:drawableLeft="@drawable/ic_action_retweet"
+        android:gravity="center"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#8D8D8D" />
 
 </RelativeLayout>
