@@ -1,8 +1,8 @@
 package com.maryamq.basictwitter.activities;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.maryamq.basictwitter.R;
-import com.maryamq.basictwitter.R.id;
-import com.maryamq.basictwitter.R.layout;
+import com.maryamq.basictwitter.TwitterApplication;
+import com.maryamq.basictwitter.adapters.FavoriteResponseHandler;
 import com.maryamq.basictwitter.client.TwitterClient;
 import com.maryamq.basictwitter.dialog.ComposeDialog;
 import com.maryamq.basictwitter.dialog.ComposeDialog.Mode;
@@ -26,7 +26,7 @@ public class DetailActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		this.client = new TwitterClient(this);
+		this.client = TwitterApplication.getRestClient();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail);
 		getActionBar().hide();
@@ -42,12 +42,10 @@ public class DetailActivity extends FragmentActivity {
 		TextView tvBody = (TextView) this.findViewById(R.id.tvTweetBody);
 		tvBody.setText(Html.fromHtml(tweetData.getBody()));
 
-		ImageView ivProfileImg = (ImageView) this
-				.findViewById(R.id.ivProfilePicture);
+		ImageView ivProfileImg = (ImageView) this.findViewById(R.id.ivProfilePicture);
 		ImageLoader imgLoader = ImageLoader.getInstance();
 		ivProfileImg.setImageResource(android.R.color.transparent);
-		imgLoader.displayImage(tweetData.getUser().getProfileImageUrl(),
-				ivProfileImg);
+		imgLoader.displayImage(tweetData.getUser().getProfileImageUrl(), ivProfileImg);
 
 		// SHow media
 		ImageView ivMedia = (ImageView) this.findViewById(R.id.ivDetailMedia);
@@ -57,15 +55,14 @@ public class DetailActivity extends FragmentActivity {
 			imgLoader.displayImage(mediaUrl, ivMedia);
 			ivMedia.setVisibility(View.VISIBLE);
 		}
-		
+
 		Button ibRetweet = (Button) this.findViewById(R.id.ibRetweet);
 		Button ibReply = (Button) this.findViewById(R.id.ibReply);
 		ibRetweet.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				ComposeDialog dialog = new ComposeDialog(client, tweetData,
-						Mode.RETWEET);
+				ComposeDialog dialog = new ComposeDialog(client, tweetData, Mode.RETWEET);
 				dialog.show(DetailActivity.this.getSupportFragmentManager(),
 						"fragment_retweet");
 			}
@@ -75,12 +72,38 @@ public class DetailActivity extends FragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				ComposeDialog dialog = new ComposeDialog(client, tweetData,
-						Mode.REPLY);
+				ComposeDialog dialog = new ComposeDialog(client, tweetData, Mode.REPLY);
 				dialog.show(DetailActivity.this.getSupportFragmentManager(),
 						"fragment_reply");
 			}
 
+		});
+		
+		final Button ibFav = (Button) this.findViewById(R.id.ibFav);
+		int favImgId = tweetData.isFavorited() ? R.drawable.ic_fav_on
+				: R.drawable.ic_fav_off;
+		Drawable img = this.getResources().getDrawable(favImgId);
+		ibFav.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
+		ibFav.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// Setting this prematurely for perceived performance.
+				boolean newFavStatus = !tweetData.isFavorited();
+				int favImgId = newFavStatus ? R.drawable.ic_fav_on
+						: R.drawable.ic_fav_off;
+				Drawable img = DetailActivity.this.getResources().getDrawable(favImgId);
+				ibFav.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
+				tweetData.setIsFavorited(newFavStatus);
+				tweetData.persist();
+				if (newFavStatus) {
+					client.favouriteTweet(tweetData.getUid(),
+							new FavoriteResponseHandler(DetailActivity.this, ibFav, tweetData));
+				} else {
+					client.destroyFavouriteTweet(tweetData.getUid(),
+							new FavoriteResponseHandler(DetailActivity.this, ibFav, tweetData));
+				}
+			}
 		});
 
 	}

@@ -2,7 +2,6 @@ package com.maryamq.basictwitter.adapters;
 
 import java.util.List;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.content.Context;
@@ -32,38 +31,6 @@ import com.maryamq.basictwitter.dialog.ComposeDialog.Mode;
 import com.maryamq.basictwitter.models.Tweet;
 
 public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
-
-	private final class FavoriteResponseHandler extends JsonHttpResponseHandler {
-		private final Button mIbFav;
-		private final Tweet mClickedTweet;
-
-		private FavoriteResponseHandler(Button ibFav, Tweet clickedTweet) {
-			mIbFav = ibFav;
-			mClickedTweet = clickedTweet;
-
-		}
-
-		@Override
-		public void onSuccess(JSONArray jsonArray) {
-			// no work here
-
-		}
-
-		@Override
-		public void onFailure(Throwable arg0, String arg1) {
-			// TODO Auto-generated method stub
-			Utils.showToast(mIbFav.getContext(), "Failure: " + arg1);
-			Utils.log("Failure: " + arg1);
-			boolean revertedStatus = !mClickedTweet.isFavorited();
-			mClickedTweet.setIsFavorited(revertedStatus);
-			mClickedTweet.save();
-			int favImgId = revertedStatus ? R.drawable.ic_fav_on : R.drawable.ic_fav_off;
-			Drawable img = getContext().getResources().getDrawable(favImgId);
-			mIbFav.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
-			// Revert UI state
-			super.onFailure(arg0, arg1);
-		}
-	}
 
 	private final class ShowDetailsClickListener implements OnClickListener {
 		private final Tweet mClickedTweet;
@@ -131,10 +98,10 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 				clickedTweet.save();
 				if (newFavStatus) {
 					client.favouriteTweet(clickedTweet.getUid(),
-							new FavoriteResponseHandler(ibFav, clickedTweet));
+							new FavoriteResponseHandler(TweetArrayAdapter.this.getContext(), ibFav, clickedTweet));
 				} else {
 					client.destroyFavouriteTweet(clickedTweet.getUid(),
-							new FavoriteResponseHandler(ibFav, clickedTweet));
+							new FavoriteResponseHandler(TweetArrayAdapter.this.getContext(), ibFav, clickedTweet));
 				}
 			}
 		});

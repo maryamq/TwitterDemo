@@ -16,6 +16,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.maryamq.basictwitter.R;
 import com.maryamq.basictwitter.TwitterApplication;
 import com.maryamq.basictwitter.activities.TwitterListFragment.IDataFetcher;
+import com.maryamq.basictwitter.dialog.ComposeDialog.Mode;
 import com.maryamq.basictwitter.models.Tweet;
 
 public class SearchActivity extends FragmentActivity implements IDataFetcher {
@@ -79,5 +80,11 @@ public class SearchActivity extends FragmentActivity implements IDataFetcher {
 	@Override
 	public void persist(List<Tweet> tweets) {
 	  // do not persist	
+	}
+
+	@Override
+	public boolean addToTimeline(Tweet t, Mode m) {
+		// TODO Auto-generated method stub
+		return true;
 	}
 }

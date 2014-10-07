@@ -8,13 +8,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.maryamq.basictwitter.R;
 import com.maryamq.basictwitter.TwitterApplication;
 import com.maryamq.basictwitter.activities.TwitterListFragment.IDataFetcher;
 import com.maryamq.basictwitter.client.TwitterClient;
+import com.maryamq.basictwitter.dialog.ComposeDialog.Mode;
 import com.maryamq.basictwitter.models.Tweet;
 import com.maryamq.basictwitter.models.User;
 
@@ -62,5 +62,11 @@ public class ProfileActivity extends FragmentActivity implements IDataFetcher {
 	public void persist(List<Tweet> tweets) {
 		// do nothing
 		
+	}
+
+	@Override
+	public boolean addToTimeline(Tweet t, Mode m) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

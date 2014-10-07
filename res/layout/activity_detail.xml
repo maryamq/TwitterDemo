@@ -57,35 +57,44 @@
         android:scaleType="fitXY"
         android:visibility="gone" />
 
-
     <LinearLayout
         android:id="@+id/linearLayout1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/ivDetailMedia"
         android:layout_marginTop="5dp" >
 
         <Button
-            android:id="@+id/ibRetweet"
-            android:layout_width="86dp"
+            android:id="@+id/ibFav"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawableLeft="@drawable/ic_fav_off"
+            android:gravity="left|center"
+            android:text="favourite"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#66757f" />
+
+        <Button
+            android:id="@+id/ibRetweet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@null"
             android:drawableLeft="@drawable/ic_action_retweet"
-            android:drawablePadding="-20dp"
             android:text="Retweet"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#66757f" />
 
         <Button
             android:id="@+id/ibReply"
-            android:layout_width="86dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
+            android:layout_weight="1"
             android:background="@null"
-            android:drawableLeft="@drawable/ic_action_retweet"
-            android:drawablePadding="-30dp"
+            android:drawableLeft="@drawable/ic_action_reply"
             android:src="@drawable/ic_action_reply"
             android:text="Reply"
             android:textAppearance="?android:attr/textAppearanceSmall"

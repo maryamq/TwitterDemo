@@ -53,6 +53,8 @@ public class TwitterListFragment extends Fragment implements ComposeDialogListen
 		public void getLastestTweets(Fragment fragment, long since_id,
 				JsonHttpResponseHandler responseHandler);
 		public void persist(List<Tweet> tweets);
+		
+		public boolean addToTimeline(Tweet t, Mode m);
 	}
 	
 
@@ -219,17 +221,21 @@ public class TwitterListFragment extends Fragment implements ComposeDialogListen
 			sourceTweet.setRetweetCount(sourceTweet.getRetweetCount() + 1);
 			newTweet.setRetweeted(true);
 			newTweet.setIsHomeTimeline(true);
+			Utils.showToast(getActivity(), "Retweeted!");
 		}
-		this.tweets.add(0, newTweet);
-		aTweets.notifyDataSetChanged();
 		
 		List<Tweet> tempTweets= new ArrayList<Tweet>();
 		tempTweets.add(newTweet);
-		tempTweets.add(sourceTweet); // we updated the retweet count
+		if (sourceTweet != null) {
+			tempTweets.add(sourceTweet); // we updated the retweet count
+		}
 		// Note that twitter client doesn ot show retweets in timeline
 		// but doing it here for demo.
 		((IDataFetcher)getActivity()).persist(tempTweets);
-		Utils.showToast(getActivity(), "Retweeted!");
+		if (((IDataFetcher)getActivity()).addToTimeline(newTweet, mode)) {
+			this.tweets.add(0, newTweet);
+			aTweets.notifyDataSetChanged();
+		}
 		
 	}
 

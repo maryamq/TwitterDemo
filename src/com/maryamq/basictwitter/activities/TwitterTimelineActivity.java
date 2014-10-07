@@ -171,4 +171,14 @@ public class TwitterTimelineActivity extends FragmentActivity implements IDataFe
 		}
 		
 	}
+
+	@Override
+	public boolean addToTimeline(Tweet t, Mode m) {
+		// TODO Auto-generated method stub
+		if (getActionBar().getSelectedTab() == this.homeTab) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
