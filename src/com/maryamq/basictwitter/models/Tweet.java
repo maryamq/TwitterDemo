@@ -113,8 +113,11 @@ public class Tweet extends Model implements Serializable {
 
 	
 	public void persist() {
+		ActiveAndroid.beginTransaction();
 		this.user = this.user.updateOrCreateUser();
 		this.save();
+		ActiveAndroid.setTransactionSuccessful();
+		ActiveAndroid.endTransaction();
 	}
 
 	private static String getMediaUrl(JSONObject json) throws JSONException {
@@ -140,11 +143,11 @@ public class Tweet extends Model implements Serializable {
 	}
 	
 	public static List<Tweet> getMentionedTweets() {
-		return new Select().from(Tweet.class).where("user_mentioned=?", true).execute();
+		return new Select().from(Tweet.class).where("user_mentioned=?", "true").execute();
 	}
 	
 	public static List<Tweet> getHomeTimelineTweets() {
-		return new Select().from(Tweet.class).where("is_home_timeline=?", true).execute();
+		return new Select().from(Tweet.class).where("is_home_timeline=?", "true").execute();
 	}
 
 
@@ -233,7 +236,7 @@ public class Tweet extends Model implements Serializable {
 	}
 
 	public void setIsHomeTimeline(boolean b) {
-		this.isInHomeTimeline = true;
+		this.isInHomeTimeline = b;
 		
 	}
 }
