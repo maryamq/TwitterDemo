@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    android:padding="5dp" >
+    android:background="@color/background">
 
   <ImageView
         android:id="@+id/ivProfilePicture"
@@ -46,6 +45,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/ivProfilePicture"
         android:autoLink="all"
+        android:layout_marginLeft="10dp"
         android:text="Tweet Body" />
     
        <ProgressBar
@@ -63,7 +63,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignRight="@+id/ivProfilePicture"
         android:layout_below="@+id/tvTweetBody"
-        android:padding="5dp"
+        android:layout_marginTop="5dp"
         android:scaleType="fitXY"
         android:visibility="gone" />
 
