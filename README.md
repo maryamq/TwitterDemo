@@ -3,7 +3,7 @@
 
 
 ## Part 2
-The following user stories must be completed:
+The following user stories must be completed (Note: Focus on Week 3 features only in walk through)
 
 * User can switch between Timeline and Mention views using tabs.
 * User can view their home timeline and mentions tweets with pull-to-refresh and infinite scroll.
@@ -13,13 +13,15 @@ The following user stories must be completed:
 
 * Advanced: Robust error handling
 * Advanced: indeterminate progress indicator
-* Advanced: User can "reply, retweet or fav from any screen
+* Advanced: User can "reply, retweet or fav from any screen. Retweets show up as :Retweeted by 
 * The user that wrote the original tweet is automatically "@" replied in compose
 * Advanced: User can click on a tweet to be taken to a "detail view" of that tweet
 * Advanced: User can take favorite (and unfavorite) or reweet actions on a tweet
 * Advanced: Improve the user interface and theme the app to feel twitter branded
 * Advanced: User can search for tweets matching a particular query and see results
+* Advanced: Fixed Persistent from Part 1:  Home and mentions timeline persist. Search and friends timeline does not (by design).
 
+![Video Walkthrough](twitter3.gif)
 
 ## Overview (Part 1)
 
