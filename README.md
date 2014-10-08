@@ -1,9 +1,29 @@
 
-# Twitter Client part 1
+# Twitter Client part 2
 
-## Overview
 
-Following user stories were implemented:
+## Part 2
+The following user stories must be completed:
+
+* User can switch between Timeline and Mention views using tabs.
+* User can view their home timeline and mentions tweets with pull-to-refresh and infinite scroll.
+* User can navigate to view their own profile
+* User can see picture, tagline, # of followers, # of following, and tweets on their profile (using viewpager).
+* User can click on the profile image in any tweet to see another user's profile (include user timeline)
+
+* Advanced: Robust error handling
+* Advanced: indeterminate progress indicator
+* Advanced: User can "reply, retweet or fav from any screen
+* The user that wrote the original tweet is automatically "@" replied in compose
+* Advanced: User can click on a tweet to be taken to a "detail view" of that tweet
+* Advanced: User can take favorite (and unfavorite) or reweet actions on a tweet
+* Advanced: Improve the user interface and theme the app to feel twitter branded
+* Advanced: User can search for tweets matching a particular query and see results
+
+
+## Overview (Part 1)
+
+Following user stories were implemented
  * User can sign in to Twitter using OAuth login authentication flow.
  * ser can view the tweets from their home timeline with additional info
  * User can view more tweets as they scroll with infinite pagination
