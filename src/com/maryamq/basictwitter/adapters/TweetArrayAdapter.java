@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -163,7 +164,9 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 		tvName.setText(tweet.getUser().getName());
 		tvName.setTypeface(null, Typeface.BOLD);
 		tvTime.setText(Utils.getRelativeTimeAgo(tweet.getCreatedAt()));
-		Utils.loadImage(ivProfileImg, tweet.getUser().getProfileImageUrl());
+		
+		ProgressBar pbLoading = (ProgressBar)convertView.findViewById(R.id.pbLoading);
+		Utils.loadImage(ivProfileImg, pbLoading, tweet.getUser().getProfileImageUrl());
 		if (tweet.isRetweeted()) {
 			tvRetweeted.setText(tweet.getUser().getName() + " retweeted");
 			tvRetweeted.setVisibility(View.VISIBLE);
@@ -178,7 +181,7 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
 		String mediaUrl = tweet.getMediaUrl();
 		Utils.log("Twitter url: " + mediaUrl);
 		if (mediaUrl != null && !mediaUrl.isEmpty()) {
-			Utils.loadImage(ivMedia, mediaUrl);
+			Utils.loadImage(ivMedia, pbLoading,  mediaUrl);
 			ivMedia.setVisibility(View.VISIBLE);
 		} else {
 			ivMedia.setVisibility(View.GONE);

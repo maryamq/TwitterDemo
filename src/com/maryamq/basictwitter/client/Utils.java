@@ -5,15 +5,19 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.maryamq.basictwitter.models.Tweet;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
 public class Utils {
 
@@ -25,13 +29,46 @@ public class Utils {
 		Log.d("DEBUG", message);
 	}
 
-	public static void loadImage(ImageView ivProfileImg, String url) {
+	public static void loadImage(final ImageView ivProfileImg,
+			final ProgressBar progressBar,
+			final String url) {
 		if (url == null || url.isEmpty()) {
 			return;
 		}
 		ImageLoader imgLoader = ImageLoader.getInstance();
 		ivProfileImg.setImageResource(android.R.color.transparent);
-		imgLoader.displayImage(url, ivProfileImg);
+		imgLoader.displayImage(url, ivProfileImg, new ImageLoadingListener() {
+
+			@Override
+			public void onLoadingCancelled(String arg0, View arg1) {
+				// TODO Auto-generated method stub
+				progressBar.setVisibility(View.GONE);
+
+			}
+
+			@Override
+			public void onLoadingComplete(String arg0, View arg1, Bitmap arg2) {
+				// TODO Auto-generated method stub
+				progressBar.setVisibility(View.GONE);
+
+			}
+
+			@Override
+			public void onLoadingFailed(String arg0, View arg1, FailReason arg2) {
+				// TODO Auto-generated method stub
+				progressBar.setVisibility(View.GONE);
+
+			}
+
+			@Override
+			public void onLoadingStarted(String arg0, View arg1) {
+				// TODO Auto-generated method stub
+				progressBar.setVisibility(View.VISIBLE);
+
+			}
+
+		});
+
 	}
 
 	public static boolean isNetworkAvailable(Context context) {

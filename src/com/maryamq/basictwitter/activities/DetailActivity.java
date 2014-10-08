@@ -8,16 +8,17 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.maryamq.basictwitter.R;
 import com.maryamq.basictwitter.TwitterApplication;
 import com.maryamq.basictwitter.adapters.FavoriteResponseHandler;
 import com.maryamq.basictwitter.client.TwitterClient;
+import com.maryamq.basictwitter.client.Utils;
 import com.maryamq.basictwitter.dialog.ComposeDialog;
 import com.maryamq.basictwitter.dialog.ComposeDialog.Mode;
 import com.maryamq.basictwitter.models.Tweet;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class DetailActivity extends FragmentActivity {
 	static final String TWEET_DATA_KEY = "tweet";
@@ -43,16 +44,17 @@ public class DetailActivity extends FragmentActivity {
 		tvBody.setText(Html.fromHtml(tweetData.getBody()));
 
 		ImageView ivProfileImg = (ImageView) this.findViewById(R.id.ivProfilePicture);
-		ImageLoader imgLoader = ImageLoader.getInstance();
+		ProgressBar pbLoading = (ProgressBar)this.findViewById(R.id.pbLoading);
+		//ImageLoader imgLoader = ImageLoader.getInstance();
 		ivProfileImg.setImageResource(android.R.color.transparent);
-		imgLoader.displayImage(tweetData.getUser().getProfileImageUrl(), ivProfileImg);
+		Utils.loadImage(ivProfileImg, pbLoading, tweetData.getUser().getProfileImageUrl());
 
 		// SHow media
 		ImageView ivMedia = (ImageView) this.findViewById(R.id.ivDetailMedia);
 		ivMedia.setImageResource(android.R.color.transparent);
 		String mediaUrl = tweetData.getMediaUrl();
 		if (mediaUrl != null && !mediaUrl.isEmpty()) {
-			imgLoader.displayImage(mediaUrl, ivMedia);
+			Utils.loadImage(ivMedia, pbLoading, mediaUrl);
 			ivMedia.setVisibility(View.VISIBLE);
 		}
 

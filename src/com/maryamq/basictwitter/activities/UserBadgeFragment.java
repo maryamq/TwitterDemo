@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.maryamq.basictwitter.R;
@@ -36,8 +37,9 @@ public class UserBadgeFragment extends Fragment {
 		ImageView ivProfilePic = (ImageView) v.findViewById(R.id.ivProfilePic);
 		TextView tvUserName = (TextView) v.findViewById(R.id.tvUserName);
 		TextView tvHandle = (TextView) v.findViewById(R.id.tvHandle);
+		ProgressBar pbLoading = (ProgressBar)v.findViewById(R.id.pbLoading);
 
-		Utils.loadImage(ivProfilePic, user.getProfileImageUrl());
+		Utils.loadImage(ivProfilePic, pbLoading, user.getProfileImageUrl());
 		tvHandle.setText("@" + user.getScreenName());
 		tvUserName.setText(user.getName());
 		return v;

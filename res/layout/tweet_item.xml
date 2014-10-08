@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:paddingTop="1dp" >
+
     <ImageView
         android:id="@+id/ivProfileImg"
         android:layout_width="40dp"
@@ -18,11 +19,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvRetweeted"
-        android:layout_toRightOf="@+id/ivProfileImg"
         android:layout_marginRight="5dp"
+        android:layout_toRightOf="@+id/ivProfileImg"
         android:text="User" />
 
-        <TextView
+    <TextView
         android:id="@+id/tvScreenName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,8 +31,7 @@
         android:layout_alignBottom="@+id/tvTweeterName"
         android:layout_toRightOf="@+id/tvTweeterName"
         android:text="Handle"
-        android:textColor="#8D8D8D"
-         />
+        android:textColor="#8D8D8D" />
 
     <TextView
         android:id="@+id/tvTime"
@@ -39,11 +39,11 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/linearLayout1"
         android:layout_below="@+id/tvRetweeted"
-        android:text="1hr Ago"
         android:layout_marginRight="3dp"
+        android:text="1hr Ago"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#8D8D8D" />
-    
+
     <TextView
         android:id="@+id/tvBody"
         android:layout_width="wrap_content"
@@ -53,9 +53,12 @@
         android:autoLink="all"
         android:linksClickable="true"
         android:text="Tweet" />
-    
-    
 
+    <ProgressBar
+        android:id="@+id/pbLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible" />
     <ImageView
         android:id="@+id/ivMedia"
         android:layout_width="match_parent"
@@ -102,9 +105,9 @@
             android:layout_width="82dp"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:textSize="10sp"
             android:drawableLeft="@drawable/ic_action_reply"
-            android:gravity="left|center" />
+            android:gravity="left|center"
+            android:textSize="10sp" />
     </LinearLayout>
 
     <TextView

@@ -5,7 +5,7 @@
     android:background="@color/background"
     android:padding="5dp" >
 
-    <ImageView
+  <ImageView
         android:id="@+id/ivProfilePicture"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -13,7 +13,10 @@
         android:layout_alignParentTop="true"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_launcher" >
+
+     
+    </ImageView>
 
     <TextView
         android:id="@+id/tvUserName"
@@ -44,6 +47,13 @@
         android:layout_below="@+id/ivProfilePicture"
         android:autoLink="all"
         android:text="Tweet Body" />
+    
+       <ProgressBar
+            android:id="@+id/pbLoading"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible" />
 
     <ImageView
         android:id="@+id/ivDetailMedia"

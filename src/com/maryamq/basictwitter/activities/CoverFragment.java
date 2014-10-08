@@ -2,18 +2,16 @@ package com.maryamq.basictwitter.activities;
 
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.maryamq.basictwitter.R;
@@ -47,8 +45,9 @@ public class CoverFragment extends Fragment {
 		TextView tvFollowing = (TextView)v.findViewById(R.id.tvFollowing);
 		TextView tvFollowers = (TextView)v.findViewById(R.id.tvFollowers);
 		
+		ProgressBar pbLoading = (ProgressBar)v.findViewById(R.id.pbLoading);
 		//Utils.loadImage(ivProfilePic, user.getProfileImageUrl());
-		Utils.loadImage(ivCover, user.getCoverUrl());
+		Utils.loadImage(ivCover, pbLoading, user.getCoverUrl());
 		//tvHandle.setText("@" + user.getScreenName());
 		
 
