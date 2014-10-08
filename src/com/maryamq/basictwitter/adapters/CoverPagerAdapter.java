@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.maryamq.basictwitter.activities.UserBadgeFragment;
-import com.maryamq.basictwitter.activities.UserTaglineFragment;
+import com.maryamq.basictwitter.fragments.UserBadgeFragment;
+import com.maryamq.basictwitter.fragments.UserTaglineFragment;
 import com.maryamq.basictwitter.models.User;
 
 public class CoverPagerAdapter extends FragmentPagerAdapter {

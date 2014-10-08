@@ -13,11 +13,11 @@ import android.widget.TextView;
 
 import com.maryamq.basictwitter.R;
 import com.maryamq.basictwitter.TwitterApplication;
-import com.maryamq.basictwitter.adapters.FavoriteResponseHandler;
+import com.maryamq.basictwitter.Utils;
 import com.maryamq.basictwitter.client.TwitterClient;
-import com.maryamq.basictwitter.client.Utils;
 import com.maryamq.basictwitter.dialog.ComposeDialog;
 import com.maryamq.basictwitter.dialog.ComposeDialog.Mode;
+import com.maryamq.basictwitter.listeners.FavoriteResponseHandler;
 import com.maryamq.basictwitter.models.Tweet;
 
 public class DetailActivity extends FragmentActivity {

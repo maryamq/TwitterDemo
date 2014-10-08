@@ -12,6 +12,7 @@ import com.codepath.oauth.OAuthBaseClient.OAuthAccessHandler;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.maryamq.basictwitter.Utils;
 import com.maryamq.basictwitter.models.User;
 
 /*

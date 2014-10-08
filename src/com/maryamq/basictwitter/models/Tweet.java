@@ -17,7 +17,7 @@ import com.activeandroid.annotation.Column.ForeignKeyAction;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 import com.maryamq.basictwitter.TwitterApplication;
-import com.maryamq.basictwitter.client.Utils;
+import com.maryamq.basictwitter.Utils;
 
 @Table(name = "Tweet", id = BaseColumns._ID)
 public class Tweet extends Model implements Serializable {

@@ -15,8 +15,9 @@ import android.support.v4.app.FragmentTransaction;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.maryamq.basictwitter.R;
 import com.maryamq.basictwitter.TwitterApplication;
-import com.maryamq.basictwitter.activities.TwitterListFragment.IDataFetcher;
 import com.maryamq.basictwitter.dialog.ComposeDialog.Mode;
+import com.maryamq.basictwitter.fragments.TwitterListFragment;
+import com.maryamq.basictwitter.fragments.TwitterListFragment.IDataFetcher;
 import com.maryamq.basictwitter.models.Tweet;
 
 public class SearchActivity extends FragmentActivity implements IDataFetcher {

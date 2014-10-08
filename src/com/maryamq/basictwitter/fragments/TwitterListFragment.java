@@ -1,4 +1,4 @@
-package com.maryamq.basictwitter.activities;
+package com.maryamq.basictwitter.fragments;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,9 +24,9 @@ import android.widget.ListView;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.maryamq.basictwitter.R;
 import com.maryamq.basictwitter.TwitterApplication;
+import com.maryamq.basictwitter.Utils;
 import com.maryamq.basictwitter.adapters.TweetArrayAdapter;
 import com.maryamq.basictwitter.client.TwitterClient;
-import com.maryamq.basictwitter.client.Utils;
 import com.maryamq.basictwitter.dialog.ComposeDialog;
 import com.maryamq.basictwitter.dialog.ComposeDialog.ComposeDialogListener;
 import com.maryamq.basictwitter.dialog.ComposeDialog.Mode;

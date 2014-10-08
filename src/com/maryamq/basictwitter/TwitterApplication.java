@@ -7,7 +7,6 @@ import android.content.Context;
 import com.activeandroid.ActiveAndroid;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.maryamq.basictwitter.client.TwitterClient;
-import com.maryamq.basictwitter.client.Utils;
 import com.maryamq.basictwitter.models.User;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;

@@ -1,4 +1,4 @@
-package com.maryamq.basictwitter.client;
+package com.maryamq.basictwitter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

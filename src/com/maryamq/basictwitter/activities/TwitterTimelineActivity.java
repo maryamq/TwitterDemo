@@ -17,12 +17,13 @@ import android.widget.SearchView.OnQueryTextListener;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.maryamq.basictwitter.R;
 import com.maryamq.basictwitter.TwitterApplication;
-import com.maryamq.basictwitter.activities.TwitterListFragment.IDataFetcher;
+import com.maryamq.basictwitter.Utils;
 import com.maryamq.basictwitter.client.TwitterClient;
-import com.maryamq.basictwitter.client.Utils;
 import com.maryamq.basictwitter.dialog.ComposeDialog;
 import com.maryamq.basictwitter.dialog.ComposeDialog.ComposeDialogListener;
 import com.maryamq.basictwitter.dialog.ComposeDialog.Mode;
+import com.maryamq.basictwitter.fragments.TwitterListFragment;
+import com.maryamq.basictwitter.fragments.TwitterListFragment.IDataFetcher;
 import com.maryamq.basictwitter.listeners.FragmentTabListener;
 import com.maryamq.basictwitter.models.Tweet;
 

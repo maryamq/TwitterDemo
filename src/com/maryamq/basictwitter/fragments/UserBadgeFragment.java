@@ -1,4 +1,4 @@
-package com.maryamq.basictwitter.activities;
+package com.maryamq.basictwitter.fragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.maryamq.basictwitter.R;
-import com.maryamq.basictwitter.client.Utils;
+import com.maryamq.basictwitter.Utils;
 import com.maryamq.basictwitter.models.User;
 
 public class UserBadgeFragment extends Fragment {

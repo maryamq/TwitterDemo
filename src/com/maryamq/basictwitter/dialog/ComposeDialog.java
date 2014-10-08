@@ -18,8 +18,8 @@ import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.maryamq.basictwitter.R;
+import com.maryamq.basictwitter.Utils;
 import com.maryamq.basictwitter.client.TwitterClient;
-import com.maryamq.basictwitter.client.Utils;
 import com.maryamq.basictwitter.models.Tweet;
 
 public class ComposeDialog extends DialogFragment {

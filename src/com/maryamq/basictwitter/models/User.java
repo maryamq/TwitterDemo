@@ -13,7 +13,7 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
-import com.maryamq.basictwitter.client.Utils;
+import com.maryamq.basictwitter.Utils;
 
 @Table(name="User", id = BaseColumns._ID)
 public class User extends Model implements Serializable {

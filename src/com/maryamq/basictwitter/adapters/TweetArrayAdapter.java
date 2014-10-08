@@ -22,13 +22,14 @@ import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.maryamq.basictwitter.R;
+import com.maryamq.basictwitter.Utils;
 import com.maryamq.basictwitter.activities.DetailActivity;
 import com.maryamq.basictwitter.activities.ProfileActivity;
 import com.maryamq.basictwitter.client.TwitterClient;
-import com.maryamq.basictwitter.client.Utils;
 import com.maryamq.basictwitter.dialog.ComposeDialog;
 import com.maryamq.basictwitter.dialog.ComposeDialog.ComposeDialogListener;
 import com.maryamq.basictwitter.dialog.ComposeDialog.Mode;
+import com.maryamq.basictwitter.listeners.FavoriteResponseHandler;
 import com.maryamq.basictwitter.models.Tweet;
 
 public class TweetArrayAdapter extends ArrayAdapter<Tweet> {
